@@ -692,37 +692,36 @@
         </div>
       </div>
 
-      <!-- Right — sample signal card -->
+      <!-- Right — LIVE signal card -->
       <div>
-        <div class="hero-card">
+        <div class="hero-card" id="live-signal-card">
           <div class="card-header">
             <span class="card-title">Tín hiệu mới nhất</span>
-            <span class="badge-live">● LIVE</span>
+            <span class="badge-live" id="live-badge">● LIVE</span>
           </div>
-          <div class="signal-pair">XAU/USD <span style="color:var(--muted);font-size:1rem;font-weight:400;">· 1H</span></div>
-          <div class="signal-type">▲ LONG — Price Action Break of Structure</div>
+          <div class="signal-pair" id="live-pair">XAU/USD <span style="color:var(--muted);font-size:1rem;font-weight:400;">· M5</span></div>
+          <div class="signal-type" id="live-type">⏳ Đang tải...</div>
           <div class="signal-rows">
             <div class="signal-row">
               <span class="sr-label">Entry</span>
-              <span class="sr-value mono-val">3,315.50</span>
+              <span class="sr-value mono-val" id="live-entry">—</span>
             </div>
             <div class="signal-row">
               <span class="sr-label">Stop Loss</span>
-              <span class="sr-value sl mono-val">3,301.00</span>
+              <span class="sr-value sl mono-val" id="live-sl">—</span>
             </div>
             <div class="signal-row">
               <span class="sr-label">Take Profit</span>
-              <span class="sr-value tp mono-val">3,346.30</span>
+              <span class="sr-value tp mono-val" id="live-tp">—</span>
             </div>
             <div class="signal-row">
               <span class="sr-label">R:R Ratio</span>
-              <span class="sr-value gold mono-val">1 : 2.12</span>
+              <span class="sr-value gold mono-val" id="live-rr">—</span>
             </div>
           </div>
           <div class="signal-ai">
             <div class="ai-label">⚡ Phân tích AI</div>
-            Cấu trúc H1 tạo BOS tăng mạnh sau nhịp quét thanh khoản vùng 3,298. Giá đang
-            retest EQ của FVG bullish — kỳ vọng tiếp tục tăng hướng ATH.
+            <span id="live-analysis">Đang tải phân tích...</span>
           </div>
         </div>
       </div>
@@ -957,7 +956,64 @@
         // Load XAU/USD mặc định khi trang load xong
         document.addEventListener('DOMContentLoaded', function() {
           loadChart('XAUUSD');
+          loadLiveSignal();
+          setInterval(loadLiveSignal, 60000); // Refresh mỗi 1 phút
         });
+
+        // ── LIVE SIGNAL ──────────────────────────────────────
+        const PROXY = 'https://trading-proxy.trannguyenthienminh.workers.dev';
+
+        async function loadLiveSignal() {
+          try {
+            const res  = await fetch(PROXY + '/api/signals?limit=1', { signal: AbortSignal.timeout(8000) });
+            const data = await res.json();
+            const sig  = data?.signals?.[0] || data?.[0];
+            if (!sig) { showSampleSignal(); return; }
+
+            const dir    = sig.direction === 'BUY' ? '▲ LONG' : '▼ SHORT';
+            const color  = sig.direction === 'BUY' ? '#34D399' : '#F87171';
+            const tf     = (sig.timeframe || 'M5').replace('PERIOD_', '');
+            const rr     = sig.rr_ratio ? `1 : ${sig.rr_ratio}` : '—';
+            const tp     = sig.tp1 || sig.tp3 || '—';
+            const status = sig.status === 'OPEN' ? '● LIVE' : '● CLOSED';
+
+            document.getElementById('live-pair').innerHTML =
+              `XAU/USD <span style="color:var(--muted);font-size:1rem;font-weight:400;">· ${tf}</span>`;
+            document.getElementById('live-type').innerHTML =
+              `<span style="color:${color}">${dir}</span> — ${sig.signal_type || 'Price Action'}`;
+            document.getElementById('live-entry').textContent  = fmt(sig.entry);
+            document.getElementById('live-sl').textContent     = fmt(sig.stop_loss);
+            document.getElementById('live-tp').textContent     = fmt(tp);
+            document.getElementById('live-rr').textContent     = rr;
+            document.getElementById('live-badge').textContent  = status;
+            document.getElementById('live-badge').style.color  = sig.status === 'OPEN' ? '#34D399' : '#888';
+
+            // Phân tích AI — lấy 150 ký tự đầu
+            const analysis = sig.analysis_text || '';
+            document.getElementById('live-analysis').textContent =
+              analysis.length > 200 ? analysis.substring(0, 200) + '...' : analysis || 'Đang cập nhật...';
+
+          } catch(e) {
+            showSampleSignal();
+          }
+        }
+
+        function fmt(val) {
+          if (!val || val === '—') return '—';
+          const n = parseFloat(val);
+          return isNaN(n) ? val : n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function showSampleSignal() {
+          document.getElementById('live-type').innerHTML = '<span style="color:#34D399">▲ LONG</span> — Price Action BOS';
+          document.getElementById('live-entry').textContent  = '—';
+          document.getElementById('live-sl').textContent     = '—';
+          document.getElementById('live-tp').textContent     = '—';
+          document.getElementById('live-rr').textContent     = '—';
+          document.getElementById('live-analysis').textContent = 'Chưa có tín hiệu mới. Hệ thống đang theo dõi thị trường...';
+          document.getElementById('live-badge').textContent = '● STANDBY';
+          document.getElementById('live-badge').style.color = '#888';
+        }
       </script>
     </div>
   </section>
