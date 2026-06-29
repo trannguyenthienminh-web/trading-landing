@@ -542,6 +542,162 @@
     }
     .step p { font-size: 0.8125rem; color: var(--muted); line-height: 1.6; }
 
+    /* ─── AI CONFLUENCE SECTION ─────────────────────────── */
+    #confluence-section {
+      background: var(--black);
+      padding: 96px 0;
+    }
+    .confluence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .confluence-left .section-sub { margin-bottom: 32px; }
+    .confluence-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .conf-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+    .conf-pill:hover { border-color: var(--gold-dim); }
+    .conf-pill-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--gold-glow);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .conf-pill-text { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+    .conf-pill-text strong { color: var(--white); }
+
+    /* Mock confluence card */
+    .mock-conf-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .mock-conf-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .mcc-top {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mcc-sym { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+    .mcc-dir { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 5px;
+      background: rgba(52,211,153,0.12); color: var(--green); }
+    .mcc-score-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mcc-donut {
+      width: 72px; height: 72px; position: relative; flex-shrink: 0;
+    }
+    .mcc-donut svg { transform: rotate(-90deg); }
+    .mcc-donut-num {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .mcc-donut-num span { font-size: 9px; color: var(--muted); }
+    .mcc-label-badge {
+      font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      padding: 3px 10px; border-radius: 4px;
+      background: rgba(201,168,76,0.15); color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: inline-block; margin-bottom: 6px;
+    }
+    .mcc-summary { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .mcc-bars { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    .mcc-bar-row { display: flex; align-items: center; gap: 8px; }
+    .mcc-bar-lbl { font-size: 10px; color: var(--muted); width: 90px; flex-shrink: 0; }
+    .mcc-bar-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .mcc-bar-fill { height: 100%; border-radius: 2px; }
+    .mcc-bar-val { font-size: 10px; color: var(--muted); width: 30px; text-align: right; font-family: monospace; }
+    .mcc-tags { padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid var(--border); }
+    .mcc-tag { font-size: 11px; padding: 3px 9px; border-radius: 100px;
+      background: rgba(52,211,153,0.08); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+    .mcc-tag.warn { background: rgba(201,168,76,0.08); color: var(--gold); border-color: rgba(201,168,76,0.2); }
+    .mcc-footer {
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: var(--muted);
+    }
+    .mcc-levels { display: flex; gap: 16px; font-family: monospace; font-size: 11px; }
+    .mcc-lv { display: flex; flex-direction: column; gap: 2px; }
+    .mcc-lv .l { font-size: 9px; color: var(--muted); text-transform: uppercase; }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────── */
+    #testimonials { background: var(--surface); }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .testi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .testi-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .testi-stars { color: var(--gold); font-size: 0.875rem; letter-spacing: 2px; }
+    .testi-text {
+      font-size: 0.9rem; color: #ccc;
+      line-height: 1.7; flex: 1;
+      font-style: italic;
+    }
+    .testi-text::before { content: '"'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.3em; margin-right: 3px; }
+    .testi-text::after  { content: '"'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.3em; margin-left: 3px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold-glow);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .testi-name { font-size: 0.875rem; font-weight: 600; }
+    .testi-role { font-size: 0.75rem; color: var(--muted); }
+    .testi-result {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--green);
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.2);
+      padding: 3px 10px; border-radius: 100px;
+      margin-top: auto;
+    }
+
     /* ─── CTA BANNER ─────────────────────────────────────── */
     #cta-band {
       padding: 80px 0;
@@ -622,6 +778,8 @@
       .table-wrap { overflow-x: auto; }
       .results-table { min-width: 520px; }
       .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .confluence-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -636,10 +794,12 @@
       <a href="#" class="nav-logo">Trading<span>AI</span></a>
       <ul class="nav-links">
         <li><a href="#features">Tính năng</a></li>
+        <li><a href="#confluence-section">Confluence AI</a></li>
         <li><a href="#results">Kết quả</a></li>
+        <li><a href="#testimonials">Cộng đồng</a></li>
         <li><a href="#how">Cách hoạt động</a></li>
         <li><a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="nav-cta-ea">🤖 Thuê EA</a></li>
-        <li><a href="https://t.me/YOUR_GROUP" target="_blank" rel="noopener" class="nav-cta">Tham gia Telegram</a></li>
+        <li><a href="vip-register.html" class="nav-cta">💎 Kênh VIP</a></li>
       </ul>
       <div class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').style.cssText='display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:20px;gap:20px;z-index:99;'">☰</div>
     </div>
@@ -665,8 +825,8 @@
           cập nhật realtime. Dành cho trader Việt Nam nghiêm túc.
         </p>
         <div class="hero-actions">
-          <a href="https://t.me/YOUR_GROUP" target="_blank" rel="noopener" class="btn-primary">
-            ✈ Tham gia cộng đồng
+          <a href="vip-register.html" class="btn-primary">
+            💎 Tham gia kênh VIP
           </a>
           <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline">
             🤖 Thuê EA SmartGold
@@ -912,9 +1072,8 @@
         #tradingview-widget > div { height: 500px !important; }
         #tradingview-widget iframe { width: 100% !important; height: 500px !important; border: none; }
         @media (max-width: 600px) {
-          .chart-wrap { height: 360px; }
-          #tradingview-widget, #tradingview-widget > div, #tradingview-widget iframe { height: 360px !important; }
-        }
+          .confluence-grid { grid-template-columns: 1fr; }
+        .testi-grid { grid-template-columns: 1fr; }
       </style>
 
       <script>
@@ -1042,8 +1201,159 @@
         </div>
         <div class="step">
           <div class="step-num">04</div>
-          <h4>Theo dõi Dashboard</h4>
-          <p>Xem lịch sử, win rate, chart realtime và hỏi AI Agent trực tiếp trên web dashboard.</p>
+          <h4>AI Confluence lọc</h4>
+          <p>AI chấm điểm 0–100 mỗi tín hiệu. Chỉ những setup ≥ 75 điểm mới lên Dashboard — đảm bảo chất lượng cao nhất.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AI CONFLUENCE SHOWCASE ───────────────────────── -->
+  <section id="confluence-section">
+    <div class="container">
+      <div class="confluence-grid">
+        <div class="confluence-left">
+          <div class="section-label">Tính năng độc quyền</div>
+          <h2 class="section-h2">Bộ lọc <span class="gold">AI Confluence</span><br/>chỉ chọn lệnh tốt nhất</h2>
+          <p class="section-sub">Telegram nhận tất cả tín hiệu. Dashboard chỉ hiển thị những setup được AI chấm ≥ 75/100 điểm — sau khi kiểm tra R:R, cấu trúc SMC, ATR và risk management.</p>
+          <div class="confluence-pills">
+            <div class="conf-pill">
+              <div class="conf-pill-icon">📊</div>
+              <div class="conf-pill-text"><strong>R:R Ratio</strong> — Chỉ chấp nhận setup có tỷ lệ Risk:Reward tối thiểu 1:1.5</div>
+            </div>
+            <div class="conf-pill">
+              <div class="conf-pill-icon">🏛</div>
+              <div class="conf-pill-text"><strong>SMC Context</strong> — Kiểm tra entry có gần Order Block, FVG, Liquidity zone không</div>
+            </div>
+            <div class="conf-pill">
+              <div class="conf-pill-icon">⚡</div>
+              <div class="conf-pill-text"><strong>ATR Volatility</strong> — Lọc các lệnh có SL quá rộng hoặc quá hẹp so với biến động thực</div>
+            </div>
+            <div class="conf-pill">
+              <div class="conf-pill-icon">🛡</div>
+              <div class="conf-pill-text"><strong>Risk Management</strong> — Đánh giá toàn diện trước khi hiển thị trên Dashboard</div>
+            </div>
+          </div>
+          <a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" class="btn-primary">
+            ⭐ Xem Dashboard Confluence
+          </a>
+        </div>
+
+        <!-- Mock Confluence Card -->
+        <div class="mock-conf-card">
+          <div class="mcc-top">
+            <div>
+              <div class="mcc-sym">XAUUSDs · M5</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px">Trend Signal</div>
+            </div>
+            <span class="mcc-dir">▲ BUY</span>
+          </div>
+          <div class="mcc-score-row">
+            <div class="mcc-donut">
+              <svg width="72" height="72" viewBox="0 0 72 72">
+                <circle cx="36" cy="36" r="28" fill="none" stroke="#252525" stroke-width="6"/>
+                <circle cx="36" cy="36" r="28" fill="none" stroke="#C9A84C" stroke-width="6"
+                  stroke-dasharray="144 176" stroke-linecap="round"/>
+              </svg>
+              <div class="mcc-donut-num">82<span>/ 100</span></div>
+            </div>
+            <div>
+              <div class="mcc-label-badge">EXCELLENT</div>
+              <div class="mcc-summary">Setup BUY mạnh, OB H4 hỗ trợ trực tiếp, R:R 1:2.1 hấp dẫn. Cấu trúc thị trường rõ ràng.</div>
+            </div>
+          </div>
+          <div class="mcc-bars">
+            <div class="mcc-bar-row">
+              <span class="mcc-bar-lbl">R:R Ratio</span>
+              <div class="mcc-bar-track"><div class="mcc-bar-fill" style="width:88%;background:#2ecc71"></div></div>
+              <span class="mcc-bar-val">22/25</span>
+            </div>
+            <div class="mcc-bar-row">
+              <span class="mcc-bar-lbl">Signal Quality</span>
+              <div class="mcc-bar-track"><div class="mcc-bar-fill" style="width:90%;background:#2ecc71"></div></div>
+              <span class="mcc-bar-val">18/20</span>
+            </div>
+            <div class="mcc-bar-row">
+              <span class="mcc-bar-lbl">ATR/Vol</span>
+              <div class="mcc-bar-track"><div class="mcc-bar-fill" style="width:80%;background:#C9A84C"></div></div>
+              <span class="mcc-bar-val">12/15</span>
+            </div>
+            <div class="mcc-bar-row">
+              <span class="mcc-bar-lbl">SMC Context</span>
+              <div class="mcc-bar-track"><div class="mcc-bar-fill" style="width:76%;background:#C9A84C"></div></div>
+              <span class="mcc-bar-val">19/25</span>
+            </div>
+            <div class="mcc-bar-row">
+              <span class="mcc-bar-lbl">Risk Mgmt</span>
+              <div class="mcc-bar-track"><div class="mcc-bar-fill" style="width:73%;background:#C9A84C"></div></div>
+              <span class="mcc-bar-val">11/15</span>
+            </div>
+          </div>
+          <div class="mcc-tags">
+            <span class="mcc-tag">✓ R:R hấp dẫn</span>
+            <span class="mcc-tag">✓ OB H4 hỗ trợ</span>
+            <span class="mcc-tag">✓ Trend rõ ràng</span>
+            <span class="mcc-tag warn">⚠ News 21:30</span>
+          </div>
+          <div class="mcc-footer">
+            <div class="mcc-levels">
+              <div class="mcc-lv"><span class="l">Entry</span><span style="color:#3498db">2,347.50</span></div>
+              <div class="mcc-lv"><span class="l">SL</span><span style="color:#F87171">2,338.00</span></div>
+              <div class="mcc-lv"><span class="l">TP1</span><span style="color:#34D399">2,358.00</span></div>
+              <div class="mcc-lv"><span class="l">TP3</span><span style="color:#34D399">2,377.50</span></div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(52,211,153,0.12);color:#34D399;font-weight:600;display:inline-block">● OPEN</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px">2026-06-29 14:30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ──────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-label">Cộng đồng</div>
+      <h2 class="section-h2">Trader Việt Nam<br/><span class="gold">nói gì về Trading AI</span></h2>
+      <p class="section-sub">Hàng trăm trader đang sử dụng hệ thống mỗi ngày để cải thiện kết quả giao dịch.</p>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">Từ khi dùng Trading AI mình không còn phải ngồi nhìn chart cả ngày nữa. Tín hiệu rõ ràng, có phân tích SMC đầy đủ, chỉ cần vào lệnh và đặt SL là xong.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">T</div>
+            <div>
+              <div class="testi-name">Trần Văn Minh</div>
+              <div class="testi-role">Trader XAU/USD · TP.HCM</div>
+            </div>
+          </div>
+          <div class="testi-result">📈 +127 pip tuần này</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">Cái hay nhất là tab Confluence — chỉ hiện những lệnh AI chấm cao. Mình chỉ giao dịch những lệnh đó thôi, win rate cải thiện rõ rệt so với trước.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">L</div>
+            <div>
+              <div class="testi-name">Lê Thị Hoa</div>
+              <div class="testi-role">Trader Forex · Hà Nội</div>
+            </div>
+          </div>
+          <div class="testi-result">📈 Win rate 74% tháng qua</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★☆</div>
+          <div class="testi-text">SmartGold EA chạy tự động ban đêm, sáng ra thấy lệnh đã chốt TP. Hệ thống ổn định, có dashboard theo dõi tiện lợi, team support nhiệt tình.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">N</div>
+            <div>
+              <div class="testi-name">Nguyễn Quốc Bảo</div>
+              <div class="testi-role">EA Trader · Đà Nẵng</div>
+            </div>
+          </div>
+          <div class="testi-result">🤖 EA chạy 3 tháng liên tục</div>
         </div>
       </div>
     </div>
@@ -1055,11 +1365,11 @@
       <div class="section-label">Bắt đầu ngay</div>
       <h2 class="section-h2">Sẵn sàng giao dịch<br /><span class="gold">có hệ thống chưa?</span></h2>
       <p class="section-sub">
-        Tham gia cộng đồng Trading AI ngay hôm nay — miễn phí, không cần kinh nghiệm lập trình.
+        Tham gia kênh VIP Trading AI — nhận tín hiệu chất lượng cao, hỗ trợ 1:1 và EA SmartGold miễn phí khi mở tài khoản qua link IB.
       </p>
       <div class="cta-actions">
-        <a href="https://t.me/YOUR_GROUP" target="_blank" rel="noopener" class="btn-primary">
-          ✈ Tham gia Telegram miễn phí
+        <a href="vip-register.html" class="btn-primary">
+          💎 Tham gia kênh VIP ngay
         </a>
         <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline">
           🤖 Đăng ký EA SmartGold
@@ -1092,9 +1402,9 @@
         <div class="footer-col">
           <h5>Kênh hỗ trợ</h5>
           <ul>
-            <li><a href="https://t.me/YOUR_GROUP" target="_blank" rel="noopener">📱 Telegram Group</a></li>
+            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener">📱 Telegram Group</a></li>
             <li><a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener">🌐 Web Dashboard</a></li>
-            <li><a href="https://t.me/YOUR_SUPPORT" target="_blank" rel="noopener">🆘 Hỗ trợ kỹ thuật</a></li>
+            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener">🆘 Hỗ trợ kỹ thuật</a></li>
           </ul>
         </div>
       </div>

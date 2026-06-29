@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng ký kênh VIP — Trading AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #090909;
+  --surface: #111111;
+  --card:    #181818;
+  --border:  #252525;
+  --gold:    #C9A84C;
+  --gold-dim:#8A6E2F;
+  --gold-glow:rgba(201,168,76,0.12);
+  --white:   #F5F5F5;
+  --muted:   #888888;
+  --green:   #34D399;
+  --red:     #F87171;
+  --blue:    #60A5FA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(9,9,9,0.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;}
+.nav-logo span{color:var(--gold);}
+.nav-back{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color .15s;}
+.nav-back:hover{color:var(--white);}
+
+/* HERO BANNER */
+.vip-hero{
+  background:linear-gradient(135deg,#0f0d07 0%,#1a1506 50%,#0f0d07 100%);
+  border-bottom:1px solid var(--border);
+  padding:60px 24px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.vip-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 80% 100% at 50% 50%,black 0%,transparent 100%);
+}
+.vip-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.3);
+  padding:5px 16px;border-radius:100px;
+  margin-bottom:20px;
+}
+.vip-hero h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;letter-spacing:-.025em;
+  line-height:1.15;margin-bottom:16px;
+  position:relative;
+}
+.vip-hero h1 span{color:var(--gold);}
+.vip-hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 28px;line-height:1.7;}
+.vip-perks{
+  display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  margin-top:4px;
+}
+.vip-perk{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;
+  color:var(--green);
+  background:rgba(52,211,153,0.08);
+  border:1px solid rgba(52,211,153,0.2);
+  padding:5px 14px;border-radius:100px;
+}
+
+/* MAIN LAYOUT */
+.main{max-width:900px;margin:0 auto;padding:48px 20px 80px;}
+
+/* STEPS */
+.steps-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-bottom:40px;
+}
+.step-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:24px;text-align:center;
+  position:relative;
+}
+.step-card.completed{border-color:rgba(52,211,153,0.3);}
+.step-card.active{border-color:rgba(201,168,76,0.5);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.step-num-circle{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;
+  margin:0 auto 12px;
+  background:var(--gold-glow);border:2px solid var(--gold-dim);color:var(--gold);
+}
+.step-card.completed .step-num-circle{background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.4);color:var(--green);}
+.step-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;margin-bottom:6px;}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+
+/* SECTION CARD */
+.section-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;margin-bottom:20px;
+}
+.section-card-header{
+  padding:18px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.section-card-header .icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--gold-glow);border:1px solid rgba(201,168,76,0.2);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+}
+.section-card-header h3{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;}
+.section-card-header p{font-size:12px;color:var(--muted);margin-top:2px;}
+.section-card-body{padding:24px;}
+
+/* IB INFO BOX */
+.ib-box{
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:12px;padding:20px 24px;margin-bottom:20px;
+}
+.ib-box-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.ib-link-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--black);border:1px solid var(--border);
+  border-radius:8px;padding:12px 16px;
+  margin-bottom:12px;
+}
+.ib-link-url{font-family:monospace;font-size:13px;color:var(--blue);flex:1;word-break:break-all;}
+.btn-copy{
+  padding:6px 14px;background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.3);border-radius:6px;
+  color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Inter',sans-serif;white-space:nowrap;transition:all .15s;
+}
+.btn-copy:hover{background:rgba(201,168,76,0.2);}
+.ib-note{font-size:12px;color:var(--muted);line-height:1.6;}
+.ib-note strong{color:var(--white);}
+
+/* REQUIREMENTS */
+.req-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.req-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+}
+.req-item .ri-icon{font-size:1.1rem;margin-top:1px;flex-shrink:0;}
+.req-item .ri-text{font-size:13px;line-height:1.55;}
+.req-item .ri-text strong{color:var(--gold);}
+.req-item .ri-text span{color:var(--muted);font-size:12px;}
+
+/* FORM */
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.field input,.field textarea,.field select{
+  width:100%;padding:11px 14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;color:var(--white);
+  font-family:'Inter',sans-serif;font-size:14px;outline:none;
+  transition:border-color .15s;
+}
+.field input:focus,.field textarea:focus{border-color:var(--gold);}
+.field textarea{resize:vertical;min-height:90px;}
+.field-hint{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5;}
+
+/* Upload area */
+.upload-area{
+  border:2px dashed var(--border);border-radius:10px;
+  padding:32px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s;
+  position:relative;
+}
+.upload-area:hover,.upload-area.drag{border-color:var(--gold);background:rgba(201,168,76,0.03);}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.upload-icon{font-size:2rem;margin-bottom:10px;}
+.upload-text{font-size:13px;color:var(--muted);}
+.upload-text strong{color:var(--gold);}
+#preview-wrap{margin-top:14px;display:none;}
+#preview-wrap img{max-width:100%;border-radius:8px;border:1px solid var(--border);}
+
+/* Submit btn */
+.btn-submit{
+  width:100%;padding:14px;
+  background:var(--gold);color:var(--black);
+  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;
+  transition:opacity .15s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-submit:hover{opacity:.9;transform:translateY(-1px);}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* Success state */
+#success-screen{display:none;}
+.success-box{
+  text-align:center;
+  background:linear-gradient(135deg,rgba(52,211,153,0.06),rgba(52,211,153,0.02));
+  border:1px solid rgba(52,211,153,0.25);
+  border-radius:16px;padding:48px 32px;
+}
+.success-icon{font-size:3.5rem;margin-bottom:20px;}
+.success-box h2{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:12px;}
+.success-box p{color:var(--muted);font-size:14px;line-height:1.7;max-width:440px;margin:0 auto 24px;}
+.success-steps{
+  display:flex;flex-direction:column;gap:10px;
+  text-align:left;max-width:400px;margin:0 auto 28px;
+}
+.ss-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  font-size:13px;
+}
+.ss-num{
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);
+  color:var(--green);font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.btn-tg{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);
+  color:var(--green);padding:11px 24px;border-radius:8px;
+  font-weight:600;font-size:14px;transition:all .15s;
+}
+.btn-tg:hover{background:rgba(52,211,153,0.2);}
+
+/* Warning box */
+.warn-box{
+  background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);
+  border-radius:10px;padding:14px 18px;
+  font-size:12px;color:#fca5a5;line-height:1.6;
+  display:flex;gap:10px;align-items:flex-start;
+  margin-top:16px;
+}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 18px;
+  font-size:13px;font-weight:600;z-index:999;
+  opacity:0;transform:translateY(8px);
+  transition:all .25s;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translateY(0);}
+#toast.ok{border-color:rgba(52,211,153,0.4);color:var(--green);}
+#toast.err{border-color:rgba(248,113,113,0.4);color:var(--red);}
+
+@media(max-width:640px){
+  .steps-row{grid-template-columns:1fr;}
+  .section-card-body{padding:16px;}
+  .main{padding:24px 16px 60px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Trading<span>AI</span></div>
+  <a href="index.html" class="nav-back">← Về trang chủ</a>
+</nav>
+
+<!-- HERO -->
+<div class="vip-hero">
+  <div class="vip-badge">💎 KÊNH VIP EXCLUSIVE</div>
+  <h1>Tham gia <span>Trading AI VIP</span><br>miễn phí khi mở IB</h1>
+  <p>Nhận tín hiệu Confluence chất lượng cao, hỗ trợ phân tích 1:1, EA SmartGold và cộng đồng trader nghiêm túc — hoàn toàn miễn phí khi mở tài khoản qua link IB.</p>
+  <div class="vip-perks">
+    <span class="vip-perk">✓ Tín hiệu Confluence ≥75 điểm</span>
+    <span class="vip-perk">✓ EA SmartGold miễn phí</span>
+    <span class="vip-perk">✓ Phân tích AI 1:1</span>
+    <span class="vip-perk">✓ Hỗ trợ 24/5</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEPS INDICATOR -->
+  <div class="steps-row">
+    <div class="step-card active">
+      <div class="step-num-circle">1</div>
+      <div class="step-title">Mở tài khoản IB</div>
+      <div class="step-desc">Đăng ký qua link IB của Trading AI tại CXM Direct</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-circle">2</div>
+      <div class="step-title">Nộp $500 USD</div>
+      <div class="step-desc">Nạp tối thiểu $500 vào tài khoản và chụp màn hình</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-circle">3</div>
+      <div class="step-title">Nhận link VIP</div>
+      <div class="step-desc">Admin duyệt trong 24h và gửi link kênh VIP cho bạn</div>
+    </div>
+  </div>
+
+  <div id="form-screen">
+
+    <!-- BƯỚC 1: MỞ TÀI KHOẢN IB -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="icon">🏦</div>
+        <div>
+          <h3>Bước 1 — Mở tài khoản IB tại CXM Direct</h3>
+          <p>Bấm vào link bên dưới, đăng ký tài khoản tại sàn CXM Direct</p>
+        </div>
+      </div>
+      <div class="section-card-body">
+        <div class="ib-box">
+          <div class="ib-box-title">🔗 Link IB Trading AI</div>
+          <div class="ib-link-row">
+            <span class="ib-link-url">https://secure.cxmvn.co/links/go/369382</span>
+            <button class="btn-copy" onclick="copyIB()">📋 Copy</button>
+          </div>
+          <div class="ib-note">
+            ⚠️ Bắt buộc đăng ký qua link này để được xác nhận IB. Nếu đăng ký trực tiếp website CXM mà không qua link, <strong>sẽ không đủ điều kiện tham gia VIP</strong>.
+          </div>
+        </div>
+
+        <a href="https://secure.cxmvn.co/links/go/369382" target="_blank" rel="noopener"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);border-radius:10px;color:var(--gold);font-weight:700;font-size:14px;transition:all .15s;"
+          onmouseover="this.style.background='rgba(201,168,76,0.18)'"
+          onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+          🏦 Mở tài khoản CXM Direct ngay →
+        </a>
+      </div>
+    </div>
+
+    <!-- BƯỚC 2: ĐIỀU KIỆN -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="icon">✅</div>
+        <div>
+          <h3>Bước 2 — Điều kiện tham gia VIP</h3>
+          <p>Hoàn thành đủ 2 điều kiện sau để được xét duyệt</p>
+        </div>
+      </div>
+      <div class="section-card-body">
+        <div class="req-list">
+          <div class="req-item">
+            <span class="ri-icon">🔗</span>
+            <div class="ri-text">
+              <strong>Mở tài khoản qua link IB</strong><br>
+              <span>Đăng ký tại CXM Direct thông qua link IB Trading AI phía trên. Tài khoản phải được tạo từ link này mới hợp lệ.</span>
+            </div>
+          </div>
+          <div class="req-item">
+            <span class="ri-icon">💵</span>
+            <div class="ri-text">
+              <strong>Nộp tối thiểu $500 USD</strong><br>
+              <span>Nạp ít nhất $500 vào tài khoản vừa mở. Chụp screenshot màn hình xác nhận nạp tiền thành công để gửi kèm đơn.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="warn-box">
+          ⚠️ <span>Số điện thoại đăng ký CXM Direct phải trùng với Telegram của bạn để admin có thể xác minh. Nếu khác nhau, vui lòng ghi chú trong phần ghi chú bên dưới.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BƯỚC 3: GỬI ĐƠN -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="icon">📝</div>
+        <div>
+          <h3>Bước 3 — Gửi đơn đăng ký</h3>
+          <p>Điền thông tin và đính kèm screenshot xác nhận nạp tiền</p>
+        </div>
+      </div>
+      <div class="section-card-body">
+        <div class="field">
+          <label>Họ và tên *</label>
+          <input type="text" id="f-name" placeholder="Nguyễn Văn A">
+        </div>
+        <div class="field">
+          <label>Username Telegram *</label>
+          <input type="text" id="f-tg" placeholder="@username (không có @ cũng được)">
+          <div class="field-hint">Admin sẽ dùng username này để gửi link VIP cho bạn. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
+        </div>
+        <div class="field">
+          <label>Account ID CXM Direct *</label>
+          <input type="text" id="f-account" placeholder="Ví dụ: 12345678" inputmode="numeric">
+          <div class="field-hint">Số tài khoản MT5 tại CXM Direct, tìm trong trang quản lý tài khoản.</div>
+        </div>
+        <div class="field">
+          <label>Số tiền đã nộp (USD) *</label>
+          <input type="number" id="f-amount" placeholder="500" min="500">
+        </div>
+        <div class="field">
+          <label>Screenshot xác nhận nạp tiền *</label>
+          <div class="upload-area" id="upload-area">
+            <input type="file" id="f-screenshot" accept="image/*" onchange="previewImg(this)">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">
+              <strong>Chọn ảnh hoặc kéo thả vào đây</strong><br>
+              Chụp màn hình trang xác nhận nạp tiền thành công tại CXM Direct
+            </div>
+          </div>
+          <div id="preview-wrap">
+            <img id="preview-img" src="" alt="Preview">
+          </div>
+        </div>
+        <div class="field">
+          <label>Ghi chú (không bắt buộc)</label>
+          <textarea id="f-note" placeholder="Ghi chú thêm nếu có, ví dụ: SĐT đăng ký CXM khác Telegram..."></textarea>
+        </div>
+
+        <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+          💎 Gửi đơn đăng ký VIP
+        </button>
+
+        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;">
+          Sau khi gửi, admin sẽ xem xét trong vòng <strong style="color:var(--white)">24 giờ</strong> và liên hệ qua Telegram để gửi link kênh VIP.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /form-screen -->
+
+  <!-- SUCCESS SCREEN -->
+  <div id="success-screen">
+    <div class="success-box">
+      <div class="success-icon">🎉</div>
+      <h2>Đơn đã được gửi thành công!</h2>
+      <p>Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!</p>
+      <div class="success-steps">
+        <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và xem xét đơn</div>
+        <div class="ss-item"><div class="ss-num">2</div>Xác minh tài khoản IB và nộp tiền</div>
+        <div class="ss-item"><div class="ss-num">3</div>Gửi link kênh VIP qua Telegram trong 24h</div>
+      </div>
+      <a href="https://t.me/trannguyenthienminh" target="_blank" rel="noopener" class="btn-tg">
+        ✈ Nhắn tin cho admin nếu cần hỗ trợ
+      </a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div id="toast"></div>
+
+<script>
+const ADMIN_TG_BOT = 'https://trading-proxy.trannguyenthienminh.workers.dev';
+const ADMIN_TG_USERNAME = 'trannguyenthienminh';
+
+function copyIB() {
+  navigator.clipboard.writeText('https://secure.cxmvn.co/links/go/369382')
+    .then(() => toast('📋 Đã copy link IB!', 'ok'));
+}
+
+function previewImg(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('preview-img').src = e.target.result;
+    document.getElementById('preview-wrap').style.display = 'block';
+    document.getElementById('upload-area').style.borderColor = 'var(--green)';
+  };
+  reader.readAsDataURL(file);
+}
+
+// Drag & drop
+const ua = document.getElementById('upload-area');
+ua.addEventListener('dragover', e => { e.preventDefault(); ua.classList.add('drag'); });
+ua.addEventListener('dragleave', () => ua.classList.remove('drag'));
+ua.addEventListener('drop', e => {
+  e.preventDefault(); ua.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    document.getElementById('f-screenshot').files = e.dataTransfer.files;
+    previewImg({ files: e.dataTransfer.files });
+  }
+});
+
+async function submitForm() {
+  const name     = document.getElementById('f-name').value.trim();
+  const tg       = document.getElementById('f-tg').value.trim().replace('@', '');
+  const account  = document.getElementById('f-account').value.trim();
+  const amount   = document.getElementById('f-amount').value.trim();
+  const note     = document.getElementById('f-note').value.trim();
+  const file     = document.getElementById('f-screenshot').files[0];
+
+  if (!name)    { toast('⚠️ Vui lòng nhập họ tên', 'err'); return; }
+  if (!tg)      { toast('⚠️ Vui lòng nhập username Telegram', 'err'); return; }
+  if (!account) { toast('⚠️ Vui lòng nhập Account ID CXM', 'err'); return; }
+  if (!amount || Number(amount) < 500) { toast('⚠️ Số tiền tối thiểu là $500 USD', 'err'); return; }
+  if (!file)    { toast('⚠️ Vui lòng đính kèm screenshot', 'err'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Đang gửi...';
+
+  // Gửi thông báo đến admin qua Telegram bot
+  const msg =
+    `💎 *ĐƠN ĐĂNG KÝ KÊNH VIP MỚI*\n\n` +
+    `👤 Tên: ${name}\n` +
+    `✈️ Telegram: @${tg}\n` +
+    `📊 Account CXM: \`${account}\`\n` +
+    `💵 Số tiền nộp: $${amount} USD\n` +
+    `📝 Ghi chú: ${note || 'Không có'}\n\n` +
+    `🔗 Link IB đã dùng: secure.cxmvn.co/links/go/369382\n\n` +
+    `👉 Vào Admin Panel để xem screenshot và duyệt.\n` +
+    `📱 Liên hệ khách: t.me/${tg}`;
+
+  try {
+    // Gửi text notification đến admin
+    await fetch(ADMIN_TG_BOT + '/api/telegram/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: null, // server sẽ dùng CHAT_ID admin
+        message: msg,
+        admin: true   // flag để server biết gửi cho admin
+      })
+    });
+  } catch(e) {
+    console.warn('TG notify:', e);
+  }
+
+  // Lưu vào localStorage để hiện lại nếu cần
+  localStorage.setItem('vip_applied', JSON.stringify({ name, tg, account, amount, time: new Date().toISOString() }));
+
+  // Mở Telegram admin để khách gửi screenshot trực tiếp
+  setTimeout(() => {
+    window.open(
+      `https://t.me/${ADMIN_TG_USERNAME}?text=` +
+      encodeURIComponent(
+        `💎 Đơn VIP - ${name}\n` +
+        `Account CXM: ${account}\n` +
+        `Nộp: $${amount} USD\n` +
+        `Telegram: @${tg}\n\n` +
+        `[Đang đính kèm screenshot xác nhận nạp tiền]`
+      ),
+      '_blank'
+    );
+  }, 500);
+
+  document.getElementById('form-screen').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(window._t);
+  window._t = setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+
+</body>
+</html>
