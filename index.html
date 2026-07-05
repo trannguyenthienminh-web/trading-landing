@@ -1205,8 +1205,10 @@
             document.getElementById('live-badge').textContent  = status;
             document.getElementById('live-badge').style.color  = sig.status === 'OPEN' ? '#34D399' : '#888';
 
-            // Phân tích AI — lấy 150 ký tự đầu
-            const analysis = sig.analysis_text || '';
+            // Phân tích AI — ưu tiên bản dịch EN nếu đang ở tiếng Anh và đã có bản dịch
+            // (dịch chạy nền phía backend, có thể chưa kịp xong ngay lúc tín hiệu mới ra)
+            const curLang = window.ThienMinhGoldI18n ? window.ThienMinhGoldI18n.getCurrentLang() : 'vi';
+            const analysis = (curLang === 'en' && sig.analysis_text_en) ? sig.analysis_text_en : (sig.analysis_text || '');
             document.getElementById('live-analysis').textContent =
               analysis.length > 200 ? analysis.substring(0, 200) + '...' : analysis || 'Đang cập nhật...';
 
@@ -1499,7 +1501,10 @@
         document.querySelectorAll('[data-lang-option]').forEach((opt) => {
           opt.addEventListener('click', () => {
             menu.classList.remove('open');
-            setTimeout(syncToggleDisplay, 50);
+            setTimeout(() => {
+              syncToggleDisplay();
+              if (typeof loadLiveSignal === 'function') loadLiveSignal();
+            }, 50);
           });
         });
         setTimeout(syncToggleDisplay, 150);
