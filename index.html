@@ -75,6 +75,7 @@
     .nav-logo span { color: var(--gold); }
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 28px;
       list-style: none;
     }
@@ -106,6 +107,43 @@
     }
     .nav-cta-ea:hover { background: rgba(201,168,76,0.08) !important; border-color: var(--gold) !important; }
     .nav-mobile-toggle { display: none; cursor: pointer; color: var(--muted); }
+
+    /* ─── LANGUAGE SWITCHER ──────────────────────────────── */
+    .lang-switcher { position: relative; display: inline-block; }
+    .lang-switcher__toggle {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--white);
+      cursor: pointer; font-size: 12px;
+      font-family: var(--font-body);
+      transition: background 0.15s ease;
+    }
+    .lang-switcher__toggle:hover { background: rgba(255,255,255,0.08); }
+    .lang-switcher__flag { font-size: 14px; line-height: 1; }
+    .lang-switcher__code { font-weight: 600; letter-spacing: 0.5px; }
+    .lang-switcher__menu {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      min-width: 150px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      opacity: 0; visibility: hidden; transform: translateY(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+      z-index: 200;
+    }
+    .lang-switcher__menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-switcher__option {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 9px; border-radius: 5px;
+      color: var(--white); font-size: 12px;
+      transition: background 0.12s ease;
+    }
+    .lang-switcher__option:hover { background: rgba(255,255,255,0.06); }
+    .lang-switcher__option.active { background: rgba(201,168,76,0.1); color: var(--gold); font-weight: 600; }
 
     /* ─── HERO ───────────────────────────────────────────── */
     #hero {
@@ -793,14 +831,31 @@
     <div class="container nav-inner">
       <a href="#" class="nav-logo">Trading<span>AI</span></a>
       <ul class="nav-links">
-        <li><a href="#features">Tính năng</a></li>
-        <li><a href="#confluence-section">Confluence AI</a></li>
-        <li><a href="#results">Kết quả</a></li>
-        <li><a href="#testimonials">Cộng đồng</a></li>
-        <li><a href="#how">Cách hoạt động</a></li>
-        <li><a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="nav-cta-ea">🤖 Thuê EA</a></li>
-        <li><a href="https://trading-dashboard-phi-nine.vercel.app/member-portal.html" target="_blank" rel="noopener" style="color:var(--muted);font-size:12px;">🔐 Thành viên</a></li>
-        <li><a href="vip-register.html" class="nav-cta">💎 Kênh VIP</a></li>
+        <li><a href="#features" data-i18n="landing.nav_features">Tính năng</a></li>
+        <li><a href="#confluence-section" data-i18n="landing.nav_confluence">Confluence AI</a></li>
+        <li><a href="#results" data-i18n="landing.nav_results">Kết quả</a></li>
+        <li><a href="#testimonials" data-i18n="landing.nav_community">Cộng đồng</a></li>
+        <li><a href="#how" data-i18n="landing.nav_how">Cách hoạt động</a></li>
+        <li><a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="nav-cta-ea" data-i18n="landing.nav_rent_ea">🤖 Thuê EA</a></li>
+        <li><a href="https://trading-dashboard-phi-nine.vercel.app/member-portal.html" target="_blank" rel="noopener" style="color:var(--muted);font-size:12px;" data-i18n="landing.nav_member">🔐 Thành viên</a></li>
+        <li><a href="vip-register.html" class="nav-cta" data-i18n="landing.nav_vip">💎 Kênh VIP</a></li>
+        <li>
+          <div class="lang-switcher">
+            <button class="lang-switcher__toggle" id="langToggle" aria-label="Chọn ngôn ngữ / Select language">
+              <span class="lang-switcher__flag" id="currentFlag">🇻🇳</span>
+              <span class="lang-switcher__code" id="currentCode">VI</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="lang-switcher__menu" id="langMenu">
+              <a href="#" class="lang-switcher__option" data-lang-option="vi">
+                <span class="lang-switcher__flag">🇻🇳</span> Tiếng Việt
+              </a>
+              <a href="#" class="lang-switcher__option" data-lang-option="en">
+                <span class="lang-switcher__flag">🇺🇸</span> English
+              </a>
+            </div>
+          </div>
+        </li>
       </ul>
       <div class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').style.cssText='display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:20px;gap:20px;z-index:99;'">☰</div>
     </div>
@@ -815,40 +870,40 @@
       <div>
         <div class="hero-eyebrow">
           <span class="pulse"></span>
-          Hệ thống đang hoạt động
+          <span data-i18n="landing.hero_eyebrow">Hệ thống đang hoạt động</span>
         </div>
         <h1 class="hero-h1">
-          Giao dịch Vàng &amp; Forex<br />
-          <span class="gold">thông minh hơn</span> với AI
+          <span data-i18n="landing.hero_h1_line1">Giao dịch Vàng &amp; Forex</span><br />
+          <span class="gold" data-i18n="landing.hero_h1_line2">thông minh hơn với AI</span>
         </h1>
-        <p class="hero-sub">
+        <p class="hero-sub" data-i18n="landing.hero_sub">
           Tín hiệu Price Action & SMC tự động từ MT5, phân tích chuyên sâu bằng AI,
           cập nhật realtime. Dành cho trader Việt Nam nghiêm túc.
         </p>
         <div class="hero-actions">
-          <a href="vip-register.html" class="btn-primary">
+          <a href="vip-register.html" class="btn-primary" data-i18n="landing.btn_join_vip">
             💎 Tham gia kênh VIP
           </a>
-          <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline">
+          <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline" data-i18n="landing.btn_rent_ea">
             🤖 Thuê EA SmartGold
           </a>
         </div>
         <div class="hero-stats">
           <div class="stat-item">
             <span class="stat-num">78%</span>
-            <span class="stat-label">Win Rate</span>
+            <span class="stat-label" data-i18n="landing.stat_winrate">Win Rate</span>
           </div>
           <div class="stat-item">
             <span class="stat-num">1:2.1</span>
-            <span class="stat-label">Avg R:R</span>
+            <span class="stat-label" data-i18n="landing.stat_rr">Avg R:R</span>
           </div>
           <div class="stat-item">
             <span class="stat-num">500+</span>
-            <span class="stat-label">Thành viên</span>
+            <span class="stat-label" data-i18n="landing.stat_members">Thành viên</span>
           </div>
           <div class="stat-item">
             <span class="stat-num">24/7</span>
-            <span class="stat-label">Tín hiệu liên tục</span>
+            <span class="stat-label" data-i18n="landing.stat_signals_247">Tín hiệu liên tục</span>
           </div>
         </div>
       </div>
@@ -857,14 +912,14 @@
       <div>
         <div class="hero-card" id="live-signal-card">
           <div class="card-header">
-            <span class="card-title">Tín hiệu mới nhất</span>
+            <span class="card-title" data-i18n="dashboard.latest_signals">Tín hiệu mới nhất</span>
             <span class="badge-live" id="live-badge">● LIVE</span>
           </div>
           <div class="signal-pair" id="live-pair">XAU/USD <span style="color:var(--muted);font-size:1rem;font-weight:400;">· M5</span></div>
           <div class="signal-type" id="live-type">⏳ Đang tải...</div>
           <div class="signal-rows">
             <div class="signal-row">
-              <span class="sr-label">Entry</span>
+              <span class="sr-label" data-i18n="landing.th_entry">Entry</span>
               <span class="sr-value mono-val" id="live-entry">—</span>
             </div>
             <div class="signal-row">
@@ -876,12 +931,12 @@
               <span class="sr-value tp mono-val" id="live-tp">—</span>
             </div>
             <div class="signal-row">
-              <span class="sr-label">R:R Ratio</span>
+              <span class="sr-label" data-i18n="landing.th_rr">R:R Ratio</span>
               <span class="sr-value gold mono-val" id="live-rr">—</span>
             </div>
           </div>
           <div class="signal-ai">
-            <div class="ai-label">⚡ Phân tích AI</div>
+            <div class="ai-label">⚡ <span data-i18n="dashboard.mkt_ai_title">Phân tích AI</span></div>
             <span id="live-analysis">Đang tải phân tích...</span>
           </div>
         </div>
@@ -892,17 +947,17 @@
   <!-- ─── FEATURES ──────────────────────────────────────── -->
   <section id="features">
     <div class="container">
-      <div class="section-label">Tại sao chọn chúng tôi</div>
-      <h2 class="section-h2">Hệ thống hoàn chỉnh,<br /><span class="gold">không cần đoán mò</span></h2>
-      <p class="section-sub">
+      <div class="section-label" data-i18n="landing.features_label">Tại sao chọn chúng tôi</div>
+      <h2 class="section-h2"><span data-i18n="landing.features_h2_line1">Hệ thống hoàn chỉnh,</span><br /><span class="gold" data-i18n="landing.features_h2_line2">không cần đoán mò</span></h2>
+      <p class="section-sub" data-i18n="landing.features_sub">
         Từ tín hiệu kỹ thuật MT5 đến phân tích AI sâu — mọi thứ đều tự động, minh bạch và
         có thể kiểm chứng.
       </p>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">📡</div>
-          <h3 class="feature-h3">Tín hiệu từ MT5</h3>
-          <p class="feature-p">
+          <h3 class="feature-h3" data-i18n="landing.feature1_title">Tín hiệu từ MT5</h3>
+          <p class="feature-p" data-i18n="landing.feature1_desc">
             Indicator THIENMINHGOLD chạy trực tiếp trên MetaTrader 5, phát hiện tín hiệu
             Price Action theo thời gian thực — Entry, SL, TP chính xác đến từng pip.
           </p>
@@ -910,8 +965,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon">🤖</div>
-          <h3 class="feature-h3">Phân tích AI chuyên sâu</h3>
-          <p class="feature-p">
+          <h3 class="feature-h3" data-i18n="landing.feature2_title">Phân tích AI chuyên sâu</h3>
+          <p class="feature-p" data-i18n="landing.feature2_desc">
             Claude AI phân tích cấu trúc thị trường, Order Block, FVG và cung cấp nhận
             định tiếng Việt rõ ràng, dưới 150 từ — dễ hiểu cho mọi cấp độ trader.
           </p>
@@ -919,8 +974,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon">📊</div>
-          <h3 class="feature-h3">Dashboard quản lý</h3>
-          <p class="feature-p">
+          <h3 class="feature-h3" data-i18n="landing.feature3_title">Dashboard quản lý</h3>
+          <p class="feature-p" data-i18n="landing.feature3_desc">
             Web dashboard realtime với TradingView chart, lịch sử tín hiệu, thống kê win
             rate và AI Agent hỏi đáp — tất cả trong một giao diện bảo mật.
           </p>
@@ -935,15 +990,15 @@
     <div class="container">
       <div class="results-header">
         <div>
-          <div class="section-label">Kết quả thực tế</div>
-          <h2 class="section-h2" style="margin-bottom:8px;">Lệnh gần đây</h2>
-          <p style="color:var(--muted);font-size:0.875rem;">Dữ liệu minh họa — kết quả thực cập nhật tự động từ hệ thống</p>
+          <div class="section-label" data-i18n="landing.results_label">Kết quả thực tế</div>
+          <h2 class="section-h2" style="margin-bottom:8px;" data-i18n="landing.results_h2">Lệnh gần đây</h2>
+          <p style="color:var(--muted);font-size:0.875rem;" data-i18n="landing.results_note">Dữ liệu minh họa — kết quả thực cập nhật tự động từ hệ thống</p>
         </div>
         <div class="results-summary">
-          <div class="rs-chip"><span class="num">24</span><span class="lbl">Lệnh</span></div>
-          <div class="rs-chip"><span class="num" style="color:var(--green);">19</span><span class="lbl">TP hit</span></div>
-          <div class="rs-chip"><span class="num" style="color:var(--red);">5</span><span class="lbl">SL hit</span></div>
-          <div class="rs-chip"><span class="num">79%</span><span class="lbl">Win rate</span></div>
+          <div class="rs-chip"><span class="num">24</span><span class="lbl" data-i18n="landing.chip_trades">Lệnh</span></div>
+          <div class="rs-chip"><span class="num" style="color:var(--green);">19</span><span class="lbl" data-i18n="landing.chip_tp">TP hit</span></div>
+          <div class="rs-chip"><span class="num" style="color:var(--red);">5</span><span class="lbl" data-i18n="landing.chip_sl">SL hit</span></div>
+          <div class="rs-chip"><span class="num">79%</span><span class="lbl" data-i18n="landing.chip_winrate">Win rate</span></div>
         </div>
       </div>
 
@@ -951,14 +1006,14 @@
         <table class="results-table">
           <thead>
             <tr>
-              <th>Cặp</th>
-              <th>Hướng</th>
-              <th>Entry</th>
-              <th>SL</th>
-              <th>TP</th>
-              <th>R:R</th>
-              <th>Kết quả</th>
-              <th>Thời gian</th>
+              <th data-i18n="landing.th_pair">Cặp</th>
+              <th data-i18n="landing.th_direction">Hướng</th>
+              <th data-i18n="landing.th_entry">Entry</th>
+              <th data-i18n="landing.th_sl">SL</th>
+              <th data-i18n="landing.th_tp">TP</th>
+              <th data-i18n="landing.th_rr">R:R</th>
+              <th data-i18n="landing.th_result">Kết quả</th>
+              <th data-i18n="landing.th_time">Thời gian</th>
             </tr>
           </thead>
           <tbody>
@@ -1181,29 +1236,29 @@
   <!-- ─── HOW IT WORKS ──────────────────────────────────── -->
   <section id="how">
     <div class="container">
-      <div class="section-label">Quy trình</div>
-      <h2 class="section-h2">Từ chart đến<br /><span class="gold">tín hiệu trong vài giây</span></h2>
-      <p class="section-sub">Hoàn toàn tự động — không cần nhìn chart liên tục.</p>
+      <div class="section-label" data-i18n="landing.how_label">Quy trình</div>
+      <h2 class="section-h2"><span data-i18n="landing.how_h2_line1">Từ chart đến</span><br /><span class="gold" data-i18n="landing.how_h2_line2">tín hiệu trong vài giây</span></h2>
+      <p class="section-sub" data-i18n="landing.how_sub">Hoàn toàn tự động — không cần nhìn chart liên tục.</p>
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <h4>MT5 phát hiện</h4>
-          <p>Indicator THIENMINHGOLD quét cấu trúc thị trường 24/5, phát hiện BOS, OB, FVG trên các khung giờ.</p>
+          <h4 data-i18n="landing.step1_title">MT5 phát hiện</h4>
+          <p data-i18n="landing.step1_desc">Indicator THIENMINHGOLD quét cấu trúc thị trường 24/5, phát hiện BOS, OB, FVG trên các khung giờ.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h4>AI phân tích</h4>
-          <p>Claude AI nhận dữ liệu, viết phân tích Price Action & SMC bằng tiếng Việt, xác nhận R:R hợp lý.</p>
+          <h4 data-i18n="landing.step2_title">AI phân tích</h4>
+          <p data-i18n="landing.step2_desc">Claude AI nhận dữ liệu, viết phân tích Price Action & SMC bằng tiếng Việt, xác nhận R:R hợp lý.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <h4>Gửi Telegram</h4>
-          <p>Tín hiệu hoàn chỉnh với Entry/SL/TP và phân tích được gửi ngay vào group — dưới 10 giây.</p>
+          <h4 data-i18n="landing.step3_title">Gửi Telegram</h4>
+          <p data-i18n="landing.step3_desc">Tín hiệu hoàn chỉnh với Entry/SL/TP và phân tích được gửi ngay vào group — dưới 10 giây.</p>
         </div>
         <div class="step">
           <div class="step-num">04</div>
-          <h4>AI Confluence lọc</h4>
-          <p>AI chấm điểm 0–100 mỗi tín hiệu. Chỉ những setup ≥ 75 điểm mới lên Dashboard — đảm bảo chất lượng cao nhất.</p>
+          <h4 data-i18n="landing.step4_title">AI Confluence lọc</h4>
+          <p data-i18n="landing.step4_desc">AI chấm điểm 0–100 mỗi tín hiệu. Chỉ những setup ≥ 75 điểm mới lên Dashboard — đảm bảo chất lượng cao nhất.</p>
         </div>
       </div>
     </div>
@@ -1214,28 +1269,28 @@
     <div class="container">
       <div class="confluence-grid">
         <div class="confluence-left">
-          <div class="section-label">Tính năng độc quyền</div>
-          <h2 class="section-h2">Bộ lọc <span class="gold">AI Confluence</span><br/>chỉ chọn lệnh tốt nhất</h2>
-          <p class="section-sub">Telegram nhận tất cả tín hiệu. Dashboard chỉ hiển thị những setup được AI chấm ≥ 75/100 điểm — sau khi kiểm tra R:R, cấu trúc SMC, ATR và risk management.</p>
+          <div class="section-label" data-i18n="landing.confluence_label">Tính năng độc quyền</div>
+          <h2 class="section-h2" data-i18n="landing.confluence_h2">Bộ lọc <span class="gold">AI Confluence</span><br/>chỉ chọn lệnh tốt nhất</h2>
+          <p class="section-sub" data-i18n="landing.confluence_sub">Telegram nhận tất cả tín hiệu. Dashboard chỉ hiển thị những setup được AI chấm ≥ 75/100 điểm — sau khi kiểm tra R:R, cấu trúc SMC, ATR và risk management.</p>
           <div class="confluence-pills">
             <div class="conf-pill">
               <div class="conf-pill-icon">📊</div>
-              <div class="conf-pill-text"><strong>R:R Ratio</strong> — Chỉ chấp nhận setup có tỷ lệ Risk:Reward tối thiểu 1:1.5</div>
+              <div class="conf-pill-text"><strong data-i18n="landing.pill1_title">R:R Ratio</strong><span data-i18n="landing.pill1_desc"> — Chỉ chấp nhận setup có tỷ lệ Risk:Reward tối thiểu 1:1.5</span></div>
             </div>
             <div class="conf-pill">
               <div class="conf-pill-icon">🏛</div>
-              <div class="conf-pill-text"><strong>SMC Context</strong> — Kiểm tra entry có gần Order Block, FVG, Liquidity zone không</div>
+              <div class="conf-pill-text"><strong data-i18n="landing.pill2_title">SMC Context</strong><span data-i18n="landing.pill2_desc"> — Kiểm tra entry có gần Order Block, FVG, Liquidity zone không</span></div>
             </div>
             <div class="conf-pill">
               <div class="conf-pill-icon">⚡</div>
-              <div class="conf-pill-text"><strong>ATR Volatility</strong> — Lọc các lệnh có SL quá rộng hoặc quá hẹp so với biến động thực</div>
+              <div class="conf-pill-text"><strong data-i18n="landing.pill3_title">ATR Volatility</strong><span data-i18n="landing.pill3_desc"> — Lọc các lệnh có SL quá rộng hoặc quá hẹp so với biến động thực</span></div>
             </div>
             <div class="conf-pill">
               <div class="conf-pill-icon">🛡</div>
-              <div class="conf-pill-text"><strong>Risk Management</strong> — Đánh giá toàn diện trước khi hiển thị trên Dashboard</div>
+              <div class="conf-pill-text"><strong data-i18n="landing.pill4_title">Risk Management</strong><span data-i18n="landing.pill4_desc"> — Đánh giá toàn diện trước khi hiển thị trên Dashboard</span></div>
             </div>
           </div>
-          <a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" class="btn-primary">
+          <a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" class="btn-primary" data-i18n="landing.btn_view_confluence">
             ⭐ Xem Dashboard Confluence
           </a>
         </div>
@@ -1316,9 +1371,9 @@
   <!-- ─── TESTIMONIALS ──────────────────────────────────── -->
   <section id="testimonials">
     <div class="container">
-      <div class="section-label">Cộng đồng</div>
-      <h2 class="section-h2">Trader Việt Nam<br/><span class="gold">nói gì về Trading AI</span></h2>
-      <p class="section-sub">Hàng trăm trader đang sử dụng hệ thống mỗi ngày để cải thiện kết quả giao dịch.</p>
+      <div class="section-label" data-i18n="landing.testimonials_label">Cộng đồng</div>
+      <h2 class="section-h2"><span data-i18n="landing.testimonials_h2_line1">Trader Việt Nam</span><br/><span class="gold" data-i18n="landing.testimonials_h2_line2">nói gì về Trading AI</span></h2>
+      <p class="section-sub" data-i18n="landing.testimonials_sub">Hàng trăm trader đang sử dụng hệ thống mỗi ngày để cải thiện kết quả giao dịch.</p>
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
@@ -1363,19 +1418,19 @@
   <!-- ─── CTA BAND ───────────────────────────────────────── -->
   <section id="cta-band">
     <div class="container">
-      <div class="section-label">Bắt đầu ngay</div>
-      <h2 class="section-h2">Sẵn sàng giao dịch<br /><span class="gold">có hệ thống chưa?</span></h2>
-      <p class="section-sub">
+      <div class="section-label" data-i18n="landing.cta_label">Bắt đầu ngay</div>
+      <h2 class="section-h2"><span data-i18n="landing.cta_h2_line1">Sẵn sàng giao dịch</span><br /><span class="gold" data-i18n="landing.cta_h2_line2">có hệ thống chưa?</span></h2>
+      <p class="section-sub" data-i18n="landing.cta_sub">
         Tham gia kênh VIP Trading AI — nhận tín hiệu chất lượng cao, hỗ trợ 1:1 và EA SmartGold miễn phí khi mở tài khoản qua link IB.
       </p>
       <div class="cta-actions">
-        <a href="vip-register.html" class="btn-primary">
+        <a href="vip-register.html" class="btn-primary" data-i18n="landing.btn_join_vip_now">
           💎 Tham gia kênh VIP ngay
         </a>
-        <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline">
+        <a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" class="btn-outline" data-i18n="landing.btn_register_ea">
           🤖 Đăng ký EA SmartGold
         </a>
-        <a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" class="btn-outline">
+        <a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" class="btn-outline" data-i18n="landing.btn_view_dashboard">
           📊 Xem Dashboard
         </a>
       </div>
@@ -1388,30 +1443,30 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <span class="nav-logo">Trading<span class="gold">AI</span></span>
-          <p>Hệ thống tín hiệu giao dịch tự động kết hợp Price Action, Smart Money Concept và phân tích AI — dành cho cộng đồng trader Việt Nam.</p>
+          <p data-i18n="landing.footer_desc">Hệ thống tín hiệu giao dịch tự động kết hợp Price Action, Smart Money Concept và phân tích AI — dành cho cộng đồng trader Việt Nam.</p>
         </div>
         <div class="footer-col">
-          <h5>Truy cập nhanh</h5>
+          <h5 data-i18n="landing.footer_quicklinks">Truy cập nhanh</h5>
           <ul>
-            <li><a href="#hero">Trang chủ</a></li>
-            <li><a href="#features">Tính năng</a></li>
-            <li><a href="#results">Kết quả</a></li>
-            <li><a href="#how">Cách hoạt động</a></li>
-            <li><a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener">🤖 Đăng ký EA</a></li>
+            <li><a href="#hero" data-i18n="landing.footer_home">Trang chủ</a></li>
+            <li><a href="#features" data-i18n="landing.footer_features">Tính năng</a></li>
+            <li><a href="#results" data-i18n="landing.footer_results">Kết quả</a></li>
+            <li><a href="#how" data-i18n="landing.footer_how">Cách hoạt động</a></li>
+            <li><a href="https://trading-dashboard-phi-nine.vercel.app/register.html" target="_blank" rel="noopener" data-i18n="landing.footer_register_ea">🤖 Đăng ký EA</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Kênh hỗ trợ</h5>
+          <h5 data-i18n="landing.footer_support">Kênh hỗ trợ</h5>
           <ul>
-            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener">📱 Telegram Group</a></li>
-            <li><a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener">🌐 Web Dashboard</a></li>
-            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener">🆘 Hỗ trợ kỹ thuật</a></li>
+            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener" data-i18n="landing.footer_telegram">📱 Telegram Group</a></li>
+            <li><a href="https://trading-dashboard-phi-nine.vercel.app" target="_blank" rel="noopener" data-i18n="landing.footer_web_dashboard">🌐 Web Dashboard</a></li>
+            <li><a href="https://t.me/THIENMINHGOLD" target="_blank" rel="noopener" data-i18n="landing.footer_tech_support">🆘 Hỗ trợ kỹ thuật</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Trading AI · Thien Minh</span>
-        <span class="footer-disclaimer">
+        <span data-i18n="landing.footer_copyright">© 2026 Trading AI · Thien Minh</span>
+        <span class="footer-disclaimer" data-i18n="landing.footer_disclaimer">
           ⚠️ Cảnh báo rủi ro: Giao dịch ngoại hối và tiền mã hóa có rủi ro cao.
           Các tín hiệu chỉ mang tính tham khảo, không phải lời khuyên đầu tư.
           Bạn có thể mất toàn bộ vốn đầu tư.
@@ -1419,6 +1474,39 @@
       </div>
     </div>
   </footer>
+
+  <script src="/js/i18n.js" defer></script>
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('langToggle');
+        const menu = document.getElementById('langMenu');
+        const flagEl = document.getElementById('currentFlag');
+        const codeEl = document.getElementById('currentCode');
+        const FLAGS = { vi: '🇻🇳', en: '🇺🇸' };
+        const CODES = { vi: 'VI', en: 'EN' };
+
+        function syncToggleDisplay() {
+          const lang = window.ThienMinhGoldI18n ? window.ThienMinhGoldI18n.getCurrentLang() : 'vi';
+          flagEl.textContent = FLAGS[lang];
+          codeEl.textContent = CODES[lang];
+        }
+
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('open');
+        });
+        document.addEventListener('click', () => menu.classList.remove('open'));
+        document.querySelectorAll('[data-lang-option]').forEach((opt) => {
+          opt.addEventListener('click', () => {
+            menu.classList.remove('open');
+            setTimeout(syncToggleDisplay, 50);
+          });
+        });
+        setTimeout(syncToggleDisplay, 150);
+      });
+    })();
+  </script>
 
 </body>
 </html>
