@@ -243,6 +243,41 @@ nav{
 }
 .btn-tg:hover{background:rgba(52,211,153,0.2);}
 
+/* MỚI — Path selector (2 lựa chọn tham gia VIP) */
+.path-selector{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-bottom:36px;
+}
+.path-card{
+  background:var(--card);border:2px solid var(--border);
+  border-radius:16px;padding:24px;cursor:pointer;
+  transition:all .2s;text-align:center;
+}
+.path-card:hover{border-color:#444;}
+.path-card.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));}
+.path-card-icon{font-size:2rem;margin-bottom:10px;}
+.path-card-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.path-card-price{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:8px;}
+.path-card-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* MỚI — Payment method tabs (giống register.html) */
+.pm-method-btn{
+  flex:1;padding:10px 14px;
+  background:var(--black);border:1px solid var(--border);
+  border-radius:8px;color:var(--muted);
+  font-family:'Space Grotesk',sans-serif;font-size:0.8125rem;font-weight:700;
+  cursor:pointer;transition:all .15s;
+}
+.pm-method-btn:hover{border-color:rgba(201,168,76,0.4);}
+.pm-method-btn.active{background:rgba(201,168,76,0.1);border-color:var(--gold);color:var(--gold);}
+.bank-info-vip{width:100%;background:var(--black);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;}
+.bank-row-vip{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);}
+.bank-row-vip:last-child{border-bottom:none;}
+.bank-row-vip-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.bank-row-vip-value{font-size:13px;font-weight:600;text-align:right;max-width:60%;word-break:break-all;color:var(--gold);}
+.qr-box-vip{background:#fff;border-radius:12px;padding:12px;width:180px;height:180px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;}
+.qr-box-vip img{width:156px;height:156px;}
+
 /* Warning box */
 .warn-box{
   background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);
@@ -296,26 +331,46 @@ nav{
 <!-- MAIN -->
 <div class="main">
 
-  <!-- STEPS INDICATOR -->
-  <div class="steps-row">
-    <div class="step-card active">
-      <div class="step-num-circle">1</div>
-      <div class="step-title">Mở tài khoản IB</div>
-      <div class="step-desc">Đăng ký qua link IB của Trading AI tại CXM Direct</div>
+  <!-- MỚI — PATH SELECTOR: 2 lựa chọn tham gia VIP -->
+  <div class="path-selector" id="path-selector">
+    <div class="path-card active" id="path-card-ib" onclick="selectPath('ib')">
+      <div class="path-card-icon">🔗</div>
+      <div class="path-card-title">Mở tài khoản IB tại CXM Direct</div>
+      <div class="path-card-price">Miễn phí</div>
+      <div class="path-card-desc">Mở tài khoản qua link IB Trading AI + nạp tối thiểu $200 vào CXM Direct → vào nhóm VIP miễn phí</div>
     </div>
-    <div class="step-card">
-      <div class="step-num-circle">2</div>
-      <div class="step-title">Nộp $500 USD</div>
-      <div class="step-desc">Nạp tối thiểu $500 vào tài khoản và chụp màn hình</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-circle">3</div>
-      <div class="step-title">Nhận link VIP</div>
-      <div class="step-desc">Admin duyệt trong 24h và gửi link kênh VIP cho bạn</div>
+    <div class="path-card" id="path-card-payment" onclick="selectPath('payment')">
+      <div class="path-card-icon">💎</div>
+      <div class="path-card-title">Đang giao dịch sàn khác?</div>
+      <div class="path-card-price">$40 USD · 1 lần duy nhất</div>
+      <div class="path-card-desc">Không cần đổi sàn — thanh toán 1 lần qua Binance hoặc PayPal để vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong></div>
     </div>
   </div>
 
+  <!-- ══════════════ LUỒNG A: MỞ TÀI KHOẢN IB (giữ nguyên) ══════════════ -->
+  <div id="path-ib-flow">
+
   <div id="form-screen">
+
+    <!-- STEPS INDICATOR -->
+    <div class="steps-row">
+      <div class="step-card active">
+        <div class="step-num-circle">1</div>
+        <div class="step-title">Mở tài khoản IB</div>
+        <div class="step-desc">Đăng ký qua link IB của Trading AI tại CXM Direct</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-circle">2</div>
+        <div class="step-title">Nộp $200 USD</div>
+        <div class="step-desc">Nạp tối thiểu $200 vào tài khoản và chụp màn hình</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-circle">3</div>
+        <div class="step-title">Nhận link VIP</div>
+        <div class="step-desc">Admin duyệt trong 24h và gửi link kênh VIP cho bạn</div>
+      </div>
+    </div>
+
 
     <!-- BƯỚC 1: MỞ TÀI KHOẢN IB -->
     <div class="section-card">
@@ -368,8 +423,8 @@ nav{
           <div class="req-item">
             <span class="ri-icon">💵</span>
             <div class="ri-text">
-              <strong>Nộp tối thiểu $500 USD</strong><br>
-              <span>Nạp ít nhất $500 vào tài khoản vừa mở. Chụp screenshot màn hình xác nhận nạp tiền thành công để gửi kèm đơn.</span>
+              <strong>Nộp tối thiểu $200 USD</strong><br>
+              <span>Nạp ít nhất $200 vào tài khoản vừa mở. Chụp screenshot màn hình xác nhận nạp tiền thành công để gửi kèm đơn.</span>
             </div>
           </div>
         </div>
@@ -406,7 +461,7 @@ nav{
         </div>
         <div class="field">
           <label>Số tiền đã nộp (USD) *</label>
-          <input type="number" id="f-amount" placeholder="500" min="500">
+          <input type="number" id="f-amount" placeholder="200" min="200">
         </div>
         <div class="field">
           <label>Screenshot xác nhận nạp tiền *</label>
@@ -439,13 +494,136 @@ nav{
 
   </div><!-- /form-screen -->
 
-  <!-- SUCCESS SCREEN -->
+  </div><!-- /path-ib-flow -->
+
+  <!-- ══════════════ LUỒNG B: THANH TOÁN $40 LIFETIME (MỚI) ══════════════ -->
+  <div id="path-payment-flow" style="display:none;">
+
+    <div class="steps-row">
+      <div class="step-card active">
+        <div class="step-num-circle">1</div>
+        <div class="step-title">Thanh toán $40</div>
+        <div class="step-desc">Qua Binance USDT hoặc PayPal</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-circle">2</div>
+        <div class="step-title">Gửi xác nhận</div>
+        <div class="step-desc">Nhập mã giao dịch + thông tin liên hệ</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-circle">3</div>
+        <div class="step-title">Vào nhóm VIP</div>
+        <div class="step-desc">Admin duyệt trong 24h — trọn đời, không gia hạn</div>
+      </div>
+    </div>
+
+    <!-- BƯỚC 1: THANH TOÁN -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="icon">💳</div>
+        <div>
+          <h3>Bước 1 — Thanh toán $40 USD (Lifetime)</h3>
+          <p>Chọn phương thức thanh toán bên dưới</p>
+        </div>
+      </div>
+      <div class="section-card-body">
+
+        <div style="display:flex;gap:8px;margin-bottom:20px;">
+          <button class="pm-method-btn active" id="vip-pm-btn-binance" onclick="selectVipPaymentMethod('binance')">₿ Binance USDT</button>
+          <button class="pm-method-btn" id="vip-pm-btn-paypal" onclick="selectVipPaymentMethod('paypal')">💰 PayPal</button>
+        </div>
+
+        <!-- PANEL BINANCE -->
+        <div id="vip-pm-panel-binance">
+          <div class="qr-box-vip">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TD8UwrjJvjtjutfSt7ZkuHG1KZ1Pb3XMdy" alt="QR Binance USDT">
+          </div>
+          <div class="bank-info-vip">
+            <div class="bank-row-vip">
+              <span class="bank-row-vip-label">Mạng lưới</span>
+              <span class="bank-row-vip-value">USDT (TRC20 - Tron)</span>
+            </div>
+            <div class="bank-row-vip">
+              <span class="bank-row-vip-label">Địa chỉ ví</span>
+              <div style="display:flex;align-items:center;">
+                <span class="bank-row-vip-value" style="font-size:12px;">TD8UwrjJvjtjutfSt7ZkuHG1KZ1Pb3XMdy</span>
+                <button class="btn-copy" onclick="copyText('TD8UwrjJvjtjutfSt7ZkuHG1KZ1Pb3XMdy', this)">Copy</button>
+              </div>
+            </div>
+            <div class="bank-row-vip">
+              <span class="bank-row-vip-label">Số tiền</span>
+              <span class="bank-row-vip-value" style="color:var(--green)">40 USDT</span>
+            </div>
+          </div>
+          <div class="warn-box">
+            ⚠️ <span>Chỉ gửi USDT qua mạng <strong style="color:var(--white)">TRC20 (Tron)</strong>. Gửi nhầm mạng khác có thể làm mất tiền vĩnh viễn.</span>
+          </div>
+        </div>
+
+        <!-- PANEL PAYPAL -->
+        <div id="vip-pm-panel-paypal" style="display:none;">
+          <div style="text-align:center;padding:10px 0 20px;">
+            <a href="https://www.paypal.me/trannguyenthienminh/40USD" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:8px;padding:13px 32px;background:#0070BA;color:#fff;border-radius:10px;font-weight:700;font-size:0.9375rem;">
+              💰 Thanh toán $40 qua PayPal
+            </a>
+          </div>
+          <div class="warn-box">
+            ⚠️ <span>PayPal có thể tính thêm phí chuyển đổi ngoại tệ tùy ngân hàng/thẻ của bạn.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BƯỚC 2: GỬI XÁC NHẬN -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="icon">📝</div>
+        <div>
+          <h3>Bước 2 — Gửi thông tin xác nhận</h3>
+          <p>Điền thông tin để admin xác nhận và thêm bạn vào nhóm VIP</p>
+        </div>
+      </div>
+      <div class="section-card-body">
+        <div class="field">
+          <label>Họ và tên *</label>
+          <input type="text" id="vf-name" placeholder="Nguyễn Văn A">
+        </div>
+        <div class="field">
+          <label>Username Telegram *</label>
+          <input type="text" id="vf-tg" placeholder="@username (không có @ cũng được)">
+          <div class="field-hint">Admin sẽ dùng username này để thêm bạn vào nhóm VIP. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
+        </div>
+        <div class="field">
+          <label id="vf-txn-label">Mã giao dịch (Transaction Hash)</label>
+          <input type="text" id="vf-txn" placeholder="VD: 8f3a2b1c9d...">
+          <div class="field-hint" id="vf-txn-hint">Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công</div>
+        </div>
+        <div class="field">
+          <label>Ghi chú (không bắt buộc)</label>
+          <textarea id="vf-note" placeholder="Ghi chú thêm nếu có..."></textarea>
+        </div>
+
+        <button class="btn-submit" id="vip-payment-submit-btn" onclick="submitPaymentForm()">
+          💎 Gửi xác nhận thanh toán
+        </button>
+
+        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;">
+          Sau khi gửi, admin sẽ xác nhận giao dịch và thêm bạn vào nhóm VIP trong vòng <strong style="color:var(--white)">24 giờ</strong>.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /path-payment-flow -->
+
+  <!-- SUCCESS SCREEN (dùng chung cho cả 2 luồng, nội dung set bằng JS) -->
   <div id="success-screen">
     <div class="success-box">
       <div class="success-icon">🎉</div>
-      <h2>Đơn đã được gửi thành công!</h2>
-      <p>Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!</p>
-      <div class="success-steps">
+      <h2 id="success-title">Đơn đã được gửi thành công!</h2>
+      <p id="success-text">Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!</p>
+      <div class="success-steps" id="success-steps">
         <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và xem xét đơn</div>
         <div class="ss-item"><div class="ss-num">2</div>Xác minh tài khoản IB và nộp tiền</div>
         <div class="ss-item"><div class="ss-num">3</div>Gửi link kênh VIP qua Telegram trong 24h</div>
@@ -463,6 +641,112 @@ nav{
 <script>
 const ADMIN_TG_BOT = 'https://trading-proxy.trannguyenthienminh.workers.dev';
 const ADMIN_TG_USERNAME = 'trannguyenthienminh';
+
+// ── MỚI: PATH SELECTOR ──────────────────────────────────
+let currentPath = 'ib';
+function selectPath(path) {
+  currentPath = path;
+  document.getElementById('path-card-ib').classList.toggle('active', path === 'ib');
+  document.getElementById('path-card-payment').classList.toggle('active', path === 'payment');
+  document.getElementById('path-ib-flow').style.display      = path === 'ib'      ? 'block' : 'none';
+  document.getElementById('path-payment-flow').style.display = path === 'payment' ? 'block' : 'none';
+  window.scrollTo({ top: document.querySelector('.path-selector').offsetTop, behavior: 'smooth' });
+}
+
+// ── MỚI: CHỌN PHƯƠNG THỨC THANH TOÁN (luồng $40 lifetime) ──
+let vipPaymentMethod = 'binance';
+function selectVipPaymentMethod(method) {
+  vipPaymentMethod = method;
+  document.getElementById('vip-pm-btn-binance').classList.toggle('active', method === 'binance');
+  document.getElementById('vip-pm-btn-paypal').classList.toggle('active', method === 'paypal');
+  document.getElementById('vip-pm-panel-binance').style.display = method === 'binance' ? 'block' : 'none';
+  document.getElementById('vip-pm-panel-paypal').style.display  = method === 'paypal'  ? 'block' : 'none';
+
+  const txnLabel = document.getElementById('vf-txn-label');
+  const txnHint  = document.getElementById('vf-txn-hint');
+  const txnInput = document.getElementById('vf-txn');
+  if (method === 'paypal') {
+    txnLabel.textContent = 'PayPal Transaction ID';
+    txnHint.textContent  = 'Copy mã Transaction ID từ email xác nhận PayPal sau khi thanh toán';
+    txnInput.placeholder = 'VD: 9XY123456A789012B';
+  } else {
+    txnLabel.textContent = 'Mã giao dịch (Transaction Hash)';
+    txnHint.textContent  = 'Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công';
+    txnInput.placeholder = 'VD: 8f3a2b1c9d...';
+  }
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Đã copy ✓';
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  });
+}
+
+// ── MỚI: SUBMIT LUỒNG B — THANH TOÁN $40 LIFETIME ──────
+async function submitPaymentForm() {
+  const name = document.getElementById('vf-name').value.trim();
+  const tg   = document.getElementById('vf-tg').value.trim().replace('@', '');
+  const txn  = document.getElementById('vf-txn').value.trim();
+  const note = document.getElementById('vf-note').value.trim();
+
+  if (!name) { toast('⚠️ Vui lòng nhập họ tên', 'err'); return; }
+  if (!tg)   { toast('⚠️ Vui lòng nhập username Telegram', 'err'); return; }
+  if (!txn)  { toast('⚠️ Vui lòng nhập mã giao dịch', 'err'); return; }
+
+  const btn = document.getElementById('vip-payment-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Đang gửi...';
+
+  const methodLabel = vipPaymentMethod === 'paypal' ? 'PayPal' : 'Binance USDT (TRC20)';
+  const msg =
+    `💎 *ĐƠN THANH TOÁN VIP LIFETIME ($40) MỚI*\n\n` +
+    `👤 Tên: ${name}\n` +
+    `✈️ Telegram: @${tg}\n` +
+    `💳 Phương thức: ${methodLabel}\n` +
+    `🔑 Mã giao dịch: \`${txn}\`\n` +
+    `📝 Ghi chú: ${note || 'Không có'}\n\n` +
+    `👉 Vào Admin Panel để xác nhận giao dịch và thêm khách vào nhóm VIP (lifetime, không nạp CXM).\n` +
+    `📱 Liên hệ khách: t.me/${tg}`;
+
+  try {
+    await fetch(ADMIN_TG_BOT + '/api/telegram/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: null, message: msg, admin: true })
+    });
+  } catch(e) { console.warn('TG notify:', e); }
+
+  localStorage.setItem('vip_payment_applied', JSON.stringify({ name, tg, method: vipPaymentMethod, txn, time: new Date().toISOString() }));
+
+  setTimeout(() => {
+    window.open(
+      `https://t.me/${ADMIN_TG_USERNAME}?text=` +
+      encodeURIComponent(
+        `💎 Đơn thanh toán VIP Lifetime ($40) - ${name}\n` +
+        `Phương thức: ${methodLabel}\n` +
+        `Mã giao dịch: ${txn}\n` +
+        `Telegram: @${tg}`
+      ),
+      '_blank'
+    );
+  }, 500);
+
+  // Cập nhật success screen cho luồng thanh toán (khác luồng IB)
+  document.getElementById('success-title').textContent = 'Đã gửi xác nhận thanh toán!';
+  document.getElementById('success-text').innerHTML =
+    'Admin Trading AI sẽ xác nhận giao dịch của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong> để thêm bạn vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong>.';
+  document.getElementById('success-steps').innerHTML = `
+    <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và kiểm tra giao dịch</div>
+    <div class="ss-item"><div class="ss-num">2</div>Xác nhận đã nhận đủ $40</div>
+    <div class="ss-item"><div class="ss-num">3</div>Thêm bạn vào nhóm VIP qua Telegram — trọn đời</div>`;
+
+  document.getElementById('path-selector').style.display   = 'none';
+  document.getElementById('path-payment-flow').style.display = 'none';
+  document.getElementById('success-screen').style.display  = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 function copyIB() {
   navigator.clipboard.writeText('https://secure.cxmvn.co/links/go/369382')
@@ -505,7 +789,7 @@ async function submitForm() {
   if (!name)    { toast('⚠️ Vui lòng nhập họ tên', 'err'); return; }
   if (!tg)      { toast('⚠️ Vui lòng nhập username Telegram', 'err'); return; }
   if (!account) { toast('⚠️ Vui lòng nhập Account ID CXM', 'err'); return; }
-  if (!amount || Number(amount) < 500) { toast('⚠️ Số tiền tối thiểu là $500 USD', 'err'); return; }
+  if (!amount || Number(amount) < 200) { toast('⚠️ Số tiền tối thiểu là $200 USD', 'err'); return; }
   if (!file)    { toast('⚠️ Vui lòng đính kèm screenshot', 'err'); return; }
 
   const btn = document.getElementById('submit-btn');
@@ -557,6 +841,17 @@ async function submitForm() {
     );
   }, 500);
 
+  // Cập nhật success screen đúng nội dung luồng IB (phòng khi trước đó
+  // success screen đã bị luồng thanh toán $40 ghi đè nội dung)
+  document.getElementById('success-title').textContent = 'Đơn đã được gửi thành công!';
+  document.getElementById('success-text').innerHTML =
+    'Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!';
+  document.getElementById('success-steps').innerHTML = `
+    <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và xem xét đơn</div>
+    <div class="ss-item"><div class="ss-num">2</div>Xác minh tài khoản IB và nộp tiền</div>
+    <div class="ss-item"><div class="ss-num">3</div>Gửi link kênh VIP qua Telegram trong 24h</div>`;
+
+  document.getElementById('path-selector').style.display = 'none';
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('success-screen').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
