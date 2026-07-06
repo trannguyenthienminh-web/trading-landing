@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="vi">
 <title>Đăng ký kênh VIP — Trading AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -278,6 +280,29 @@ nav{
 .qr-box-vip{background:#fff;border-radius:12px;padding:12px;width:180px;height:180px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;}
 .qr-box-vip img{width:156px;height:156px;}
 
+/* ── LANGUAGE SWITCHER (đồng bộ với dashboard.html) ── */
+.lang-switcher { position: relative; display: inline-block; }
+.lang-switcher__toggle {
+  display: flex; align-items: center; gap: 6px; padding: 6px 12px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--white); cursor: pointer; font-size: 12px; font-family: 'Inter', sans-serif;
+  transition: background 0.15s ease;
+}
+.lang-switcher__toggle:hover { background: rgba(255,255,255,0.08); }
+.lang-switcher__code { font-weight: 600; letter-spacing: 0.5px; }
+.lang-switcher__menu {
+  position: absolute; top: calc(100% + 6px); right: 0; min-width: 150px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s; z-index: 200;
+}
+.lang-switcher__menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-switcher__option { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border-radius: 5px; color: var(--white); font-size: 12px; transition: background 0.12s ease; }
+.lang-switcher__option:hover { background: rgba(255,255,255,0.06); }
+.lang-switcher__option.active { background: rgba(201,168,76,0.1); color: var(--gold); font-weight: 600; }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+
 /* Warning box */
 .warn-box{
   background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);
@@ -312,19 +337,31 @@ nav{
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Trading<span>AI</span></div>
-  <a href="index.html" class="nav-back">← Về trang chủ</a>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-switcher__toggle" id="langToggle" aria-label="Chọn ngôn ngữ / Select language">
+        <span class="lang-switcher__code" id="currentCode">VI</span>
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-switcher__menu" id="langMenu">
+        <a href="#" class="lang-switcher__option" data-lang-option="vi">Tiếng Việt</a>
+        <a href="#" class="lang-switcher__option" data-lang-option="en">English</a>
+      </div>
+    </div>
+    <a href="index.html" class="nav-back" data-i18n="vip_register.nav_back">← Về trang chủ</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="vip-hero">
-  <div class="vip-badge">💎 KÊNH VIP EXCLUSIVE</div>
-  <h1>Tham gia <span>Trading AI VIP</span><br>miễn phí khi mở IB</h1>
-  <p>Nhận tín hiệu Confluence chất lượng cao, hỗ trợ phân tích 1:1, EA SmartGold và cộng đồng trader nghiêm túc — hoàn toàn miễn phí khi mở tài khoản qua link IB.</p>
+  <div class="vip-badge" data-i18n="vip_register.hero_badge">💎 KÊNH VIP EXCLUSIVE</div>
+  <h1><span style="color:var(--white)" data-i18n="vip_register.hero_h1_1">Tham gia</span> <span data-i18n="vip_register.hero_h1_2">Trading AI VIP</span><br><span style="color:var(--white)" data-i18n="vip_register.hero_h1_3">miễn phí khi mở IB</span></h1>
+  <p data-i18n="vip_register.hero_sub">Nhận tín hiệu Confluence chất lượng cao, hỗ trợ phân tích 1:1, EA SmartGold và cộng đồng trader nghiêm túc — hoàn toàn miễn phí khi mở tài khoản qua link IB.</p>
   <div class="vip-perks">
-    <span class="vip-perk">✓ Tín hiệu Confluence ≥75 điểm</span>
-    <span class="vip-perk">✓ EA SmartGold miễn phí</span>
-    <span class="vip-perk">✓ Phân tích AI 1:1</span>
-    <span class="vip-perk">✓ Hỗ trợ 24/5</span>
+    <span class="vip-perk" data-i18n="vip_register.perk1">✓ Tín hiệu Confluence ≥75 điểm</span>
+    <span class="vip-perk" data-i18n="vip_register.perk2">✓ EA SmartGold miễn phí</span>
+    <span class="vip-perk" data-i18n="vip_register.perk3">✓ Phân tích AI 1:1</span>
+    <span class="vip-perk" data-i18n="vip_register.perk4">✓ Hỗ trợ 24/5</span>
   </div>
 </div>
 
@@ -335,15 +372,15 @@ nav{
   <div class="path-selector" id="path-selector">
     <div class="path-card active" id="path-card-ib" onclick="selectPath('ib')">
       <div class="path-card-icon">🔗</div>
-      <div class="path-card-title">Mở tài khoản IB tại CXM Direct</div>
-      <div class="path-card-price">Miễn phí</div>
-      <div class="path-card-desc">Mở tài khoản qua link IB Trading AI + nạp tối thiểu $200 vào CXM Direct → vào nhóm VIP miễn phí</div>
+      <div class="path-card-title" data-i18n="vip_register.path_ib_title">Mở tài khoản IB tại CXM Direct</div>
+      <div class="path-card-price" data-i18n="vip_register.path_ib_price">Miễn phí</div>
+      <div class="path-card-desc" data-i18n="vip_register.path_ib_desc">Mở tài khoản qua link IB Trading AI + nạp tối thiểu $200 vào CXM Direct → vào nhóm VIP miễn phí</div>
     </div>
     <div class="path-card" id="path-card-payment" onclick="selectPath('payment')">
       <div class="path-card-icon">💎</div>
-      <div class="path-card-title">Đang giao dịch sàn khác?</div>
-      <div class="path-card-price">$40 USD · 1 lần duy nhất</div>
-      <div class="path-card-desc">Không cần đổi sàn — thanh toán 1 lần qua Binance hoặc PayPal để vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong></div>
+      <div class="path-card-title" data-i18n="vip_register.path_payment_title">Đang giao dịch sàn khác?</div>
+      <div class="path-card-price" data-i18n="vip_register.path_payment_price">$40 USD · 1 lần duy nhất</div>
+      <div class="path-card-desc" data-i18n-html="vip_register.path_payment_desc_html">Không cần đổi sàn — thanh toán 1 lần qua Binance hoặc PayPal để vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong></div>
     </div>
   </div>
 
@@ -356,18 +393,18 @@ nav{
     <div class="steps-row">
       <div class="step-card active">
         <div class="step-num-circle">1</div>
-        <div class="step-title">Mở tài khoản IB</div>
-        <div class="step-desc">Đăng ký qua link IB của Trading AI tại CXM Direct</div>
+        <div class="step-title" data-i18n="vip_register.ib_step1_title">Mở tài khoản IB</div>
+        <div class="step-desc" data-i18n="vip_register.ib_step1_desc">Đăng ký qua link IB của Trading AI tại CXM Direct</div>
       </div>
       <div class="step-card">
         <div class="step-num-circle">2</div>
-        <div class="step-title">Nộp $200 USD</div>
-        <div class="step-desc">Nạp tối thiểu $200 vào tài khoản và chụp màn hình</div>
+        <div class="step-title" data-i18n="vip_register.ib_step2_title">Nộp $200 USD</div>
+        <div class="step-desc" data-i18n="vip_register.ib_step2_desc">Nạp tối thiểu $200 vào tài khoản và chụp màn hình</div>
       </div>
       <div class="step-card">
         <div class="step-num-circle">3</div>
-        <div class="step-title">Nhận link VIP</div>
-        <div class="step-desc">Admin duyệt trong 24h và gửi link kênh VIP cho bạn</div>
+        <div class="step-title" data-i18n="vip_register.ib_step3_title">Nhận link VIP</div>
+        <div class="step-desc" data-i18n="vip_register.ib_step3_desc">Admin duyệt trong 24h và gửi link kênh VIP cho bạn</div>
       </div>
     </div>
 
@@ -377,18 +414,18 @@ nav{
       <div class="section-card-header">
         <div class="icon">🏦</div>
         <div>
-          <h3>Bước 1 — Mở tài khoản IB tại CXM Direct</h3>
-          <p>Bấm vào link bên dưới, đăng ký tài khoản tại sàn CXM Direct</p>
+          <h3 data-i18n="vip_register.ib_s1_title">Bước 1 — Mở tài khoản IB tại CXM Direct</h3>
+          <p data-i18n="vip_register.ib_s1_sub">Bấm vào link bên dưới, đăng ký tài khoản tại sàn CXM Direct</p>
         </div>
       </div>
       <div class="section-card-body">
         <div class="ib-box">
-          <div class="ib-box-title">🔗 Link IB Trading AI</div>
+          <div class="ib-box-title" data-i18n="vip_register.ib_box_title">🔗 Link IB Trading AI</div>
           <div class="ib-link-row">
             <span class="ib-link-url">https://secure.cxmvn.co/links/go/369382</span>
             <button class="btn-copy" onclick="copyIB()">📋 Copy</button>
           </div>
-          <div class="ib-note">
+          <div class="ib-note" data-i18n-html="vip_register.ib_note_html">
             ⚠️ Bắt buộc đăng ký qua link này để được xác nhận IB. Nếu đăng ký trực tiếp website CXM mà không qua link, <strong>sẽ không đủ điều kiện tham gia VIP</strong>.
           </div>
         </div>
@@ -396,7 +433,8 @@ nav{
         <a href="https://secure.cxmvn.co/links/go/369382" target="_blank" rel="noopener"
           style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);border-radius:10px;color:var(--gold);font-weight:700;font-size:14px;transition:all .15s;"
           onmouseover="this.style.background='rgba(201,168,76,0.18)'"
-          onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+          onmouseout="this.style.background='rgba(201,168,76,0.1)'"
+          data-i18n="vip_register.btn_open_cxm">
           🏦 Mở tài khoản CXM Direct ngay →
         </a>
       </div>
@@ -407,8 +445,8 @@ nav{
       <div class="section-card-header">
         <div class="icon">✅</div>
         <div>
-          <h3>Bước 2 — Điều kiện tham gia VIP</h3>
-          <p>Hoàn thành đủ 2 điều kiện sau để được xét duyệt</p>
+          <h3 data-i18n="vip_register.ib_s2_title">Bước 2 — Điều kiện tham gia VIP</h3>
+          <p data-i18n="vip_register.ib_s2_sub">Hoàn thành đủ 2 điều kiện sau để được xét duyệt</p>
         </div>
       </div>
       <div class="section-card-body">
@@ -416,21 +454,21 @@ nav{
           <div class="req-item">
             <span class="ri-icon">🔗</span>
             <div class="ri-text">
-              <strong>Mở tài khoản qua link IB</strong><br>
-              <span>Đăng ký tại CXM Direct thông qua link IB Trading AI phía trên. Tài khoản phải được tạo từ link này mới hợp lệ.</span>
+              <strong data-i18n="vip_register.req1_title">Mở tài khoản qua link IB</strong><br>
+              <span data-i18n="vip_register.req1_desc">Đăng ký tại CXM Direct thông qua link IB Trading AI phía trên. Tài khoản phải được tạo từ link này mới hợp lệ.</span>
             </div>
           </div>
           <div class="req-item">
             <span class="ri-icon">💵</span>
             <div class="ri-text">
-              <strong>Nộp tối thiểu $200 USD</strong><br>
-              <span>Nạp ít nhất $200 vào tài khoản vừa mở. Chụp screenshot màn hình xác nhận nạp tiền thành công để gửi kèm đơn.</span>
+              <strong data-i18n="vip_register.req2_title">Nộp tối thiểu $200 USD</strong><br>
+              <span data-i18n="vip_register.req2_desc">Nạp ít nhất $200 vào tài khoản vừa mở. Chụp screenshot màn hình xác nhận nạp tiền thành công để gửi kèm đơn.</span>
             </div>
           </div>
         </div>
 
         <div class="warn-box">
-          ⚠️ <span>Số điện thoại đăng ký CXM Direct phải trùng với Telegram của bạn để admin có thể xác minh. Nếu khác nhau, vui lòng ghi chú trong phần ghi chú bên dưới.</span>
+          ⚠️ <span data-i18n="vip_register.warn_phone">Số điện thoại đăng ký CXM Direct phải trùng với Telegram của bạn để admin có thể xác minh. Nếu khác nhau, vui lòng ghi chú trong phần ghi chú bên dưới.</span>
         </div>
       </div>
     </div>
@@ -440,37 +478,37 @@ nav{
       <div class="section-card-header">
         <div class="icon">📝</div>
         <div>
-          <h3>Bước 3 — Gửi đơn đăng ký</h3>
-          <p>Điền thông tin và đính kèm screenshot xác nhận nạp tiền</p>
+          <h3 data-i18n="vip_register.ib_s3_title">Bước 3 — Gửi đơn đăng ký</h3>
+          <p data-i18n="vip_register.ib_s3_sub">Điền thông tin và đính kèm screenshot xác nhận nạp tiền</p>
         </div>
       </div>
       <div class="section-card-body">
         <div class="field">
-          <label>Họ và tên *</label>
+          <label data-i18n="vip_register.label_name">Họ và tên *</label>
           <input type="text" id="f-name" placeholder="Nguyễn Văn A">
         </div>
         <div class="field">
-          <label>Username Telegram *</label>
+          <label data-i18n="vip_register.label_tg">Username Telegram *</label>
           <input type="text" id="f-tg" placeholder="@username (không có @ cũng được)">
-          <div class="field-hint">Admin sẽ dùng username này để gửi link VIP cho bạn. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
+          <div class="field-hint" data-i18n="vip_register.tg_hint">Admin sẽ dùng username này để gửi link VIP cho bạn. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
         </div>
         <div class="field">
-          <label>Account ID CXM Direct *</label>
+          <label data-i18n="vip_register.label_account">Account ID CXM Direct *</label>
           <input type="text" id="f-account" placeholder="Ví dụ: 12345678" inputmode="numeric">
-          <div class="field-hint">Số tài khoản MT5 tại CXM Direct, tìm trong trang quản lý tài khoản.</div>
+          <div class="field-hint" data-i18n="vip_register.account_hint">Số tài khoản MT5 tại CXM Direct, tìm trong trang quản lý tài khoản.</div>
         </div>
         <div class="field">
-          <label>Số tiền đã nộp (USD) *</label>
+          <label data-i18n="vip_register.label_amount">Số tiền đã nộp (USD) *</label>
           <input type="number" id="f-amount" placeholder="200" min="200">
         </div>
         <div class="field">
-          <label>Screenshot xác nhận nạp tiền *</label>
+          <label data-i18n="vip_register.label_screenshot">Screenshot xác nhận nạp tiền *</label>
           <div class="upload-area" id="upload-area">
             <input type="file" id="f-screenshot" accept="image/*" onchange="previewImg(this)">
             <div class="upload-icon">📸</div>
             <div class="upload-text">
-              <strong>Chọn ảnh hoặc kéo thả vào đây</strong><br>
-              Chụp màn hình trang xác nhận nạp tiền thành công tại CXM Direct
+              <strong data-i18n="vip_register.screenshot_hint_strong">Chọn ảnh hoặc kéo thả vào đây</strong><br>
+              <span data-i18n="vip_register.screenshot_hint">Chụp màn hình trang xác nhận nạp tiền thành công tại CXM Direct</span>
             </div>
           </div>
           <div id="preview-wrap">
@@ -478,15 +516,15 @@ nav{
           </div>
         </div>
         <div class="field">
-          <label>Ghi chú (không bắt buộc)</label>
+          <label data-i18n="vip_register.label_note">Ghi chú (không bắt buộc)</label>
           <textarea id="f-note" placeholder="Ghi chú thêm nếu có, ví dụ: SĐT đăng ký CXM khác Telegram..."></textarea>
         </div>
 
-        <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+        <button class="btn-submit" id="submit-btn" onclick="submitForm()" data-i18n="vip_register.btn_submit_ib">
           💎 Gửi đơn đăng ký VIP
         </button>
 
-        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;">
+        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;" data-i18n-html="vip_register.footer_note_ib_html">
           Sau khi gửi, admin sẽ xem xét trong vòng <strong style="color:var(--white)">24 giờ</strong> và liên hệ qua Telegram để gửi link kênh VIP.
         </div>
       </div>
@@ -502,18 +540,18 @@ nav{
     <div class="steps-row">
       <div class="step-card active">
         <div class="step-num-circle">1</div>
-        <div class="step-title">Thanh toán $40</div>
-        <div class="step-desc">Qua Binance USDT hoặc PayPal</div>
+        <div class="step-title" data-i18n="vip_register.pay_step1_title">Thanh toán $40</div>
+        <div class="step-desc" data-i18n="vip_register.pay_step1_desc">Qua Binance USDT hoặc PayPal</div>
       </div>
       <div class="step-card">
         <div class="step-num-circle">2</div>
-        <div class="step-title">Gửi xác nhận</div>
-        <div class="step-desc">Nhập mã giao dịch + thông tin liên hệ</div>
+        <div class="step-title" data-i18n="vip_register.pay_step2_title">Gửi xác nhận</div>
+        <div class="step-desc" data-i18n="vip_register.pay_step2_desc">Nhập mã giao dịch + thông tin liên hệ</div>
       </div>
       <div class="step-card">
         <div class="step-num-circle">3</div>
-        <div class="step-title">Vào nhóm VIP</div>
-        <div class="step-desc">Admin duyệt trong 24h — trọn đời, không gia hạn</div>
+        <div class="step-title" data-i18n="vip_register.pay_step3_title">Vào nhóm VIP</div>
+        <div class="step-desc" data-i18n="vip_register.pay_step3_desc">Admin duyệt trong 24h — trọn đời, không gia hạn</div>
       </div>
     </div>
 
@@ -522,15 +560,15 @@ nav{
       <div class="section-card-header">
         <div class="icon">💳</div>
         <div>
-          <h3>Bước 1 — Thanh toán $40 USD (Lifetime)</h3>
-          <p>Chọn phương thức thanh toán bên dưới</p>
+          <h3 data-i18n="vip_register.pay_s1_title">Bước 1 — Thanh toán $40 USD (Lifetime)</h3>
+          <p data-i18n="vip_register.pay_s1_sub">Chọn phương thức thanh toán bên dưới</p>
         </div>
       </div>
       <div class="section-card-body">
 
         <div style="display:flex;gap:8px;margin-bottom:20px;">
-          <button class="pm-method-btn active" id="vip-pm-btn-binance" onclick="selectVipPaymentMethod('binance')">₿ Binance USDT</button>
-          <button class="pm-method-btn" id="vip-pm-btn-paypal" onclick="selectVipPaymentMethod('paypal')">💰 PayPal</button>
+          <button class="pm-method-btn active" id="vip-pm-btn-binance" onclick="selectVipPaymentMethod('binance')" data-i18n="vip_register.pm_binance">₿ Binance USDT</button>
+          <button class="pm-method-btn" id="vip-pm-btn-paypal" onclick="selectVipPaymentMethod('paypal')" data-i18n="vip_register.pm_paypal">💰 PayPal</button>
         </div>
 
         <!-- PANEL BINANCE -->
@@ -540,23 +578,23 @@ nav{
           </div>
           <div class="bank-info-vip">
             <div class="bank-row-vip">
-              <span class="bank-row-vip-label">Mạng lưới</span>
+              <span class="bank-row-vip-label" data-i18n="vip_register.binance_network_label">Mạng lưới</span>
               <span class="bank-row-vip-value">USDT (TRC20 - Tron)</span>
             </div>
             <div class="bank-row-vip">
-              <span class="bank-row-vip-label">Địa chỉ ví</span>
+              <span class="bank-row-vip-label" data-i18n="vip_register.binance_address_label">Địa chỉ ví</span>
               <div style="display:flex;align-items:center;">
                 <span class="bank-row-vip-value" style="font-size:12px;">TD8UwrjJvjtjutfSt7ZkuHG1KZ1Pb3XMdy</span>
                 <button class="btn-copy" onclick="copyText('TD8UwrjJvjtjutfSt7ZkuHG1KZ1Pb3XMdy', this)">Copy</button>
               </div>
             </div>
             <div class="bank-row-vip">
-              <span class="bank-row-vip-label">Số tiền</span>
+              <span class="bank-row-vip-label" data-i18n="vip_register.amount_label">Số tiền</span>
               <span class="bank-row-vip-value" style="color:var(--green)">40 USDT</span>
             </div>
           </div>
           <div class="warn-box">
-            ⚠️ <span>Chỉ gửi USDT qua mạng <strong style="color:var(--white)">TRC20 (Tron)</strong>. Gửi nhầm mạng khác có thể làm mất tiền vĩnh viễn.</span>
+            ⚠️ <span data-i18n-html="vip_register.binance_warning">Chỉ gửi USDT qua mạng <strong style="color:var(--white)">TRC20 (Tron)</strong>. Gửi nhầm mạng khác có thể làm mất tiền vĩnh viễn.</span>
           </div>
         </div>
 
@@ -564,12 +602,13 @@ nav{
         <div id="vip-pm-panel-paypal" style="display:none;">
           <div style="text-align:center;padding:10px 0 20px;">
             <a href="https://www.paypal.me/trannguyenthienminh/40USD" target="_blank" rel="noopener"
-               style="display:inline-flex;align-items:center;gap:8px;padding:13px 32px;background:#0070BA;color:#fff;border-radius:10px;font-weight:700;font-size:0.9375rem;">
+               style="display:inline-flex;align-items:center;gap:8px;padding:13px 32px;background:#0070BA;color:#fff;border-radius:10px;font-weight:700;font-size:0.9375rem;"
+               data-i18n="vip_register.btn_pay_paypal">
               💰 Thanh toán $40 qua PayPal
             </a>
           </div>
           <div class="warn-box">
-            ⚠️ <span>PayPal có thể tính thêm phí chuyển đổi ngoại tệ tùy ngân hàng/thẻ của bạn.</span>
+            ⚠️ <span data-i18n="vip_register.paypal_warning">PayPal có thể tính thêm phí chuyển đổi ngoại tệ tùy ngân hàng/thẻ của bạn.</span>
           </div>
         </div>
 
@@ -581,35 +620,35 @@ nav{
       <div class="section-card-header">
         <div class="icon">📝</div>
         <div>
-          <h3>Bước 2 — Gửi thông tin xác nhận</h3>
-          <p>Điền thông tin để admin xác nhận và thêm bạn vào nhóm VIP</p>
+          <h3 data-i18n="vip_register.pay_s2_title">Bước 2 — Gửi thông tin xác nhận</h3>
+          <p data-i18n="vip_register.pay_s2_sub">Điền thông tin để admin xác nhận và thêm bạn vào nhóm VIP</p>
         </div>
       </div>
       <div class="section-card-body">
         <div class="field">
-          <label>Họ và tên *</label>
+          <label data-i18n="vip_register.label_name">Họ và tên *</label>
           <input type="text" id="vf-name" placeholder="Nguyễn Văn A">
         </div>
         <div class="field">
-          <label>Username Telegram *</label>
+          <label data-i18n="vip_register.label_tg">Username Telegram *</label>
           <input type="text" id="vf-tg" placeholder="@username (không có @ cũng được)">
-          <div class="field-hint">Admin sẽ dùng username này để thêm bạn vào nhóm VIP. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
+          <div class="field-hint" data-i18n="vip_register.tg_hint_payment">Admin sẽ dùng username này để thêm bạn vào nhóm VIP. Đảm bảo đã nhắn /start cho bot Trading AI.</div>
         </div>
         <div class="field">
-          <label id="vf-txn-label">Mã giao dịch (Transaction Hash)</label>
+          <label id="vf-txn-label" data-i18n="vip_register.label_txn_binance">Mã giao dịch (Transaction Hash)</label>
           <input type="text" id="vf-txn" placeholder="VD: 8f3a2b1c9d...">
-          <div class="field-hint" id="vf-txn-hint">Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công</div>
+          <div class="field-hint" id="vf-txn-hint" data-i18n="vip_register.hint_txn_binance">Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công</div>
         </div>
         <div class="field">
-          <label>Ghi chú (không bắt buộc)</label>
+          <label data-i18n="vip_register.label_note">Ghi chú (không bắt buộc)</label>
           <textarea id="vf-note" placeholder="Ghi chú thêm nếu có..."></textarea>
         </div>
 
-        <button class="btn-submit" id="vip-payment-submit-btn" onclick="submitPaymentForm()">
+        <button class="btn-submit" id="vip-payment-submit-btn" onclick="submitPaymentForm()" data-i18n="vip_register.btn_submit_payment">
           💎 Gửi xác nhận thanh toán
         </button>
 
-        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;">
+        <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6;" data-i18n-html="vip_register.footer_note_payment_html">
           Sau khi gửi, admin sẽ xác nhận giao dịch và thêm bạn vào nhóm VIP trong vòng <strong style="color:var(--white)">24 giờ</strong>.
         </div>
       </div>
@@ -621,14 +660,14 @@ nav{
   <div id="success-screen">
     <div class="success-box">
       <div class="success-icon">🎉</div>
-      <h2 id="success-title">Đơn đã được gửi thành công!</h2>
-      <p id="success-text">Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!</p>
+      <h2 id="success-title" data-i18n="vip_register.success_title_ib">Đơn đã được gửi thành công!</h2>
+      <p id="success-text" data-i18n-html="vip_register.success_text_ib_html">Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!</p>
       <div class="success-steps" id="success-steps">
         <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và xem xét đơn</div>
         <div class="ss-item"><div class="ss-num">2</div>Xác minh tài khoản IB và nộp tiền</div>
         <div class="ss-item"><div class="ss-num">3</div>Gửi link kênh VIP qua Telegram trong 24h</div>
       </div>
-      <a href="https://t.me/trannguyenthienminh" target="_blank" rel="noopener" class="btn-tg">
+      <a href="https://t.me/trannguyenthienminh" target="_blank" rel="noopener" class="btn-tg" data-i18n="vip_register.btn_contact_admin">
         ✈ Nhắn tin cho admin nếu cần hỗ trợ
       </a>
     </div>
@@ -638,6 +677,39 @@ nav{
 
 <div id="toast"></div>
 
+<script src="/js/i18n.js" defer></script>
+<script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('langToggle');
+      const menu = document.getElementById('langMenu');
+      const codeEl = document.getElementById('currentCode');
+      const CODES = { vi: 'VI', en: 'EN' };
+      function syncToggleDisplay() {
+        const lang = window.ThienMinhGoldI18n ? window.ThienMinhGoldI18n.getCurrentLang() : 'vi';
+        codeEl.textContent = CODES[lang];
+      }
+      toggle.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('open'); });
+      document.addEventListener('click', () => menu.classList.remove('open'));
+      document.querySelectorAll('[data-lang-option]').forEach((opt) => {
+        opt.addEventListener('click', () => {
+          menu.classList.remove('open');
+          setTimeout(() => {
+            syncToggleDisplay();
+            // Vẽ lại nhãn mã giao dịch theo phương thức đang chọn (nội dung JS-managed)
+            if (typeof vipPaymentMethod !== 'undefined') selectVipPaymentMethod(vipPaymentMethod);
+          }, 50);
+        });
+      });
+      setTimeout(syncToggleDisplay, 150);
+    });
+  })();
+
+  function curLang() {
+    return (window.ThienMinhGoldI18n ? window.ThienMinhGoldI18n.getCurrentLang() : null)
+      || localStorage.getItem('thienminhgold_lang') || 'vi';
+  }
+</script>
 <script>
 const ADMIN_TG_BOT = 'https://trading-proxy.trannguyenthienminh.workers.dev';
 const ADMIN_TG_USERNAME = 'trannguyenthienminh';
@@ -665,13 +737,14 @@ function selectVipPaymentMethod(method) {
   const txnLabel = document.getElementById('vf-txn-label');
   const txnHint  = document.getElementById('vf-txn-hint');
   const txnInput = document.getElementById('vf-txn');
+  const en = curLang() === 'en';
   if (method === 'paypal') {
     txnLabel.textContent = 'PayPal Transaction ID';
-    txnHint.textContent  = 'Copy mã Transaction ID từ email xác nhận PayPal sau khi thanh toán';
+    txnHint.textContent  = en ? 'Copy the Transaction ID from your PayPal confirmation email after paying' : 'Copy mã Transaction ID từ email xác nhận PayPal sau khi thanh toán';
     txnInput.placeholder = 'VD: 9XY123456A789012B';
   } else {
-    txnLabel.textContent = 'Mã giao dịch (Transaction Hash)';
-    txnHint.textContent  = 'Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công';
+    txnLabel.textContent = en ? 'Transaction Hash' : 'Mã giao dịch (Transaction Hash)';
+    txnHint.textContent  = en ? 'Copy the Transaction Hash from the Binance app after successfully sending USDT' : 'Copy mã Transaction Hash từ app Binance sau khi gửi USDT thành công';
     txnInput.placeholder = 'VD: 8f3a2b1c9d...';
   }
 }
@@ -734,10 +807,15 @@ async function submitPaymentForm() {
   }, 500);
 
   // Cập nhật success screen cho luồng thanh toán (khác luồng IB)
-  document.getElementById('success-title').textContent = 'Đã gửi xác nhận thanh toán!';
-  document.getElementById('success-text').innerHTML =
-    'Admin Trading AI sẽ xác nhận giao dịch của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong> để thêm bạn vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong>.';
-  document.getElementById('success-steps').innerHTML = `
+  const en2 = curLang() === 'en';
+  document.getElementById('success-title').textContent = en2 ? 'Payment confirmation sent!' : 'Đã gửi xác nhận thanh toán!';
+  document.getElementById('success-text').innerHTML = en2
+    ? 'Trading AI admin will confirm your transaction and contact you on Telegram within <strong>24 hours</strong> to add you to the VIP group for <strong style="color:var(--gold)">life</strong>.'
+    : 'Admin Trading AI sẽ xác nhận giao dịch của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong> để thêm bạn vào nhóm VIP <strong style="color:var(--gold)">trọn đời</strong>.';
+  document.getElementById('success-steps').innerHTML = en2 ? `
+    <div class="ss-item"><div class="ss-num">1</div>Admin receives notification and checks the transaction</div>
+    <div class="ss-item"><div class="ss-num">2</div>Confirms the full $40 was received</div>
+    <div class="ss-item"><div class="ss-num">3</div>Adds you to the VIP group via Telegram — lifetime</div>` : `
     <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và kiểm tra giao dịch</div>
     <div class="ss-item"><div class="ss-num">2</div>Xác nhận đã nhận đủ $40</div>
     <div class="ss-item"><div class="ss-num">3</div>Thêm bạn vào nhóm VIP qua Telegram — trọn đời</div>`;
@@ -843,10 +921,15 @@ async function submitForm() {
 
   // Cập nhật success screen đúng nội dung luồng IB (phòng khi trước đó
   // success screen đã bị luồng thanh toán $40 ghi đè nội dung)
-  document.getElementById('success-title').textContent = 'Đơn đã được gửi thành công!';
-  document.getElementById('success-text').innerHTML =
-    'Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!';
-  document.getElementById('success-steps').innerHTML = `
+  const en1 = curLang() === 'en';
+  document.getElementById('success-title').textContent = en1 ? 'Application submitted successfully!' : 'Đơn đã được gửi thành công!';
+  document.getElementById('success-text').innerHTML = en1
+    ? 'Trading AI admin will review your application and contact you on Telegram within <strong>24 hours</strong>. Thanks for joining!'
+    : 'Admin Trading AI sẽ xem xét đơn của bạn và liên hệ qua Telegram trong vòng <strong>24 giờ</strong>. Cảm ơn bạn đã tham gia!';
+  document.getElementById('success-steps').innerHTML = en1 ? `
+    <div class="ss-item"><div class="ss-num">1</div>Admin receives notification and reviews the application</div>
+    <div class="ss-item"><div class="ss-num">2</div>Verify the IB account and deposit</div>
+    <div class="ss-item"><div class="ss-num">3</div>Send the VIP channel link via Telegram within 24h</div>` : `
     <div class="ss-item"><div class="ss-num">1</div>Admin nhận thông báo và xem xét đơn</div>
     <div class="ss-item"><div class="ss-num">2</div>Xác minh tài khoản IB và nộp tiền</div>
     <div class="ss-item"><div class="ss-num">3</div>Gửi link kênh VIP qua Telegram trong 24h</div>`;
